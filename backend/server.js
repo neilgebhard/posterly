@@ -1,61 +1,60 @@
-require("dotenv").config();
+const dotenv = require("dotenv");
 const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-const errorHandler = require("./middleware/error");
+const connectDb = require("./config/db");
+
+dotenv.config();
+
 const attachUser = require("./middleware/attachUser");
+const errorHandler = require("./middleware/error");
+const notFound = require("./middleware/notFound");
+
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posts");
-const PORT = process.env.PORT;
 
-mongoose
-  .connect(process.env.DB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+connectDb();
+
+let app = express();
+
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    credentials: true,
   })
-  .then(() => {
-    let app = express();
-    app.use(morgan("combined"));
-    app.use(
-      cors({
-        origin: ["http://localhost:3000"],
-        credentials: true,
-      })
-    );
-    app.use(express.json());
-    app.use(cookieParser());
-    app.use(attachUser);
+);
 
-    app.use("/api", authRoutes);
-    app.use("/api", postRoutes);
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
-    const __dirname = path.resolve();
-    if (process.env.NODE_ENV === "production") {
-      app.use(express.static(path.join(__dirname, "/frontend/build")));
+app.use(express.json());
+app.use(cookieParser());
+app.use(attachUser);
 
-      app.get("*", (req, res) =>
-        res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
-      );
-    } else {
-      app.get("/", (req, res) => {
-        res.send("API is running....");
-      });
-    }
+app.use("/api", authRoutes);
+app.use("/api", postRoutes);
 
-    app.use(function (err, req, res, next) {
-      res.status(err.status || 500);
-      res.send({ error: err.message });
-    });
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/frontend/build")));
 
-    app.use(function (req, res) {
-      res.status(404);
-      res.send({ error: "Can't be found!" });
-    });
-
-    app.listen(PORT, () => {
-      console.log(`Express started on port ${PORT}`);
-    });
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running.");
   });
+}
+
+app.use(errorHandler);
+app.use(notFound);
+
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+  console.log(`Express started on port ${PORT}`);
+});

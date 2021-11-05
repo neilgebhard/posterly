@@ -29,9 +29,9 @@ const Signup = () => {
       const { data } = await axios.post("/api/signup", values);
       authContext.setAuthState(data);
       history.push("/");
-    } catch (error) {
+    } catch (e) {
       setLoading(false);
-      const { data } = error.response;
+      const { data } = e.response;
       setError(data.message);
     }
   };

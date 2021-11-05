@@ -1,51 +1,113 @@
 const express = require("express");
 const router = express.Router();
-const jwtDecode = require("jwt-decode");
-const jwt = require("express-jwt");
 const asyncHandler = require("express-async-handler");
+const protect = require("../middleware/protect");
 const Post = require("../models/post");
-const User = require("../models/user");
 
-const checkJwt = jwt({
-  secret: process.env.JWT_SECRET,
-  algorithms: ["HS256"],
-  issuer: "api.posts",
-  audience: "api.posts",
-  getToken: (req) => req.cookies.token,
-});
+// TODO: add seeds
 
-router.get("/post/:_id", async (req, res) => {
-  const { _id } = req.params;
-  const post = await Post.findOne({ _id });
-  res.json(post);
-});
+// get posts * DONE
 
-router.post("/post/:_id/comment", async (req, res) => {
-  const { _id } = req.params;
-  const { text } = req.body;
-  const { username } = req.user;
-  const post = await Post.findOneAndUpdate(
-    { _id },
-    { $push: { comments: { text, username } } }
-  );
-  await post.save();
-  res.json(post);
-});
+// get post * DONE
+// add post * DONE
+// update post
+// delete post
 
-router.get("/posts", async (req, res) => {
-  const posts = await Post.find();
-  res.json(posts);
-});
+// add comment * DONE
+// delete comment
+// updated comment
 
-router.post("/posts", checkJwt, async (req, res) => {
-  const { title, body, url } = req.body;
-  const { _id, username, email } = req.user;
-  const post = new Post({
-    ...req.body,
-    username,
-  });
-  await post.save();
-  res.json(post);
-});
+// add reply *
+// delete reply
+// update reply
+
+// TODO: add search, pagination
+router.get(
+  "/posts",
+  asyncHandler(async (req, res) => {
+    const posts = await Post.find();
+    res.json(posts);
+  })
+);
+
+router.get(
+  "/posts/:postId",
+  asyncHandler(async (req, res) => {
+    const post = await Post.findById(req.params.postId);
+
+    if (post) {
+      res.json(post);
+    } else {
+      res.status(404).json({ message: "Post not found!" });
+    }
+  })
+);
+
+router.post(
+  "/posts",
+  protect,
+  asyncHandler(async (req, res) => {
+    const { _id, username } = req.user;
+    const post = new Post({
+      username,
+      user: _id,
+      ...req.body,
+    });
+    await post.save();
+    res.json(post);
+  })
+);
+
+router.post(
+  "/posts/:postId/comment",
+  asyncHandler(async (req, res) => {
+    const { postId } = req.params;
+    const { text } = req.body;
+    const { username } = req.user;
+    const post = await Post.findOne({ _id: postId });
+    if (post) {
+      post.comments.push({ text, username, user: req.user._id });
+      const updatedPost = await post.save();
+      res.json(updatedPost);
+    } else {
+      return res.status(404).json({ message: "Post doesn't exist." });
+    }
+  })
+);
+
+router.post(
+  "/posts/:postId/comment",
+  asyncHandler(async (req, res) => {
+    const { postId } = req.params;
+    const { text } = req.body;
+    const { username } = req.user;
+    const post = await Post.findOne({ _id: postId });
+    if (post) {
+      post.comments.push({ text, username, user: req.user._id });
+      const updatedPost = await post.save();
+      res.json(updatedPost);
+    } else {
+      return res.status(404).json({ message: "Post doesn't exist." });
+    }
+  })
+);
+
+router.post(
+  "/posts/:postId/comment/:commentId/reply",
+  asyncHandler(async (req, res) => {
+    const { postId, commentId } = req.params;
+    const { text } = req.body;
+    const { username } = req.user;
+    const post = await Post.findById(postId);
+    if (post) {
+      const comment = post.comments.id(commentId);
+      comment.replies.push({ text, username, user: req.user._id });
+      const updatedPost = await post.save();
+      res.json(updatedPost);
+    } else {
+      return res.status(404).json({ message: "Post doesn't exist." });
+    }
+  })
+);
 
 module.exports = router;

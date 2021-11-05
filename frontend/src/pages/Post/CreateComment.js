@@ -1,28 +1,32 @@
 import axios from "axios";
 import { useState } from "react";
 import { Formik, Form } from "formik";
-import TextArea from "../ui/TextArea";
+import TextArea from "../../ui/TextArea";
 import * as Yup from "yup";
 
 const CommentSchema = Yup.object().shape({
   text: Yup.string().required("Enter a comment."),
 });
 
-const CreateComment = (props) => {
+const CreateComment = ({ postId, setPost }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, actions) => {
     try {
       setLoading(true);
       setError("");
-      const { data } = await axios.post(
-        `/api/post/${props.postId}/comment`,
-        values
-      );
-    } catch (error) {
+      const { data } = await axios.post(`/api/posts/${postId}/comment`, values);
+      setPost(data);
       setLoading(false);
-      const { data } = error.response;
+      actions.resetForm({
+        values: {
+          text: "",
+        },
+      });
+    } catch (e) {
+      setLoading(false);
+      const { data } = e.response;
       setError(data.message);
     }
   };
@@ -32,7 +36,7 @@ const CreateComment = (props) => {
       initialValues={{
         text: "",
       }}
-      onSubmit={(values) => handleSubmit(values)}
+      onSubmit={(values, actions) => handleSubmit(values, actions)}
       validationSchema={CommentSchema}
     >
       <Form>

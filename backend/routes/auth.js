@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const jwtDecode = require("jwt-decode");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/user");
 
@@ -9,8 +8,8 @@ router.post(
   asyncHandler(async (req, res) => {
     const { username, email } = req.body;
 
-    const existingUsername = await User.findOne({ username });
-    if (existingUsername) {
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
       return res.status(400).json({ message: "Username already exists." });
     }
 
@@ -26,8 +25,8 @@ router.post(
         httpOnly: true,
         secure: true,
       });
-      const { username, email } = user;
-      res.status(201).json({ username, email });
+      const { username, email, isAdmin } = user;
+      res.status(201).json({ username, email, isAdmin });
     } else {
       res
         .status(400)
@@ -39,24 +38,18 @@ router.post(
 router.post(
   "/login",
   asyncHandler(async (req, res) => {
-    try {
-      const { email, password } = req.body;
-      const user = await User.findOne({ email });
-      if (await user?.matchPassword(password)) {
-        const token = await user.generateToken();
-        res.cookie("token", token, {
-          httpOnly: true,
-          secure: true,
-        });
-        const { username, email } = user;
-        res.json({ username, email });
-      } else {
-        return res.status(401).json({ message: "Authentication failed." });
-      }
-    } catch (err) {
-      return res
-        .status(400)
-        .json({ message: "There was a problem logging in." });
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (await user?.matchPassword(password)) {
+      const token = await user.generateToken();
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+      });
+      const { username, email, isAdmin } = user;
+      res.json({ username, email, isAdmin });
+    } else {
+      return res.status(401).json({ message: "Authentication failed." });
     }
   })
 );

@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { useAuth } from "../AuthContext";
 import TextInput from "../ui/TextInput";
+import TextArea from "../ui/TextArea";
 import * as Yup from "yup";
 
 const PostSchema = Yup.object().shape({
@@ -27,9 +28,9 @@ const CreatePost = () => {
       const { data } = await axios.post("/api/posts", values);
       authContext.setAuthState(data);
       history.push("/");
-    } catch (error) {
+    } catch (e) {
       setLoading(false);
-      const { data } = error.response;
+      const { data } = e.response;
       setError(data.message);
     }
   };
@@ -47,7 +48,7 @@ const CreatePost = () => {
       <Form>
         <h1>Create a post</h1>
         <TextInput label="Title" id="title" name="title" type="text" />
-        <TextInput label="Body" id="body" name="body" type="text" />
+        <TextArea label="Body" id="body" name="body" type="text" />
         <TextInput label="URL" id="url" name="url" type="text" />
         <button type="submit" disabled={loading}>
           Submit

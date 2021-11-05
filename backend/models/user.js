@@ -2,28 +2,41 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const schema = mongoose.Schema({
-  username: {
-    type: String,
-    unique: true,
-    required: true,
+const userSchema = mongoose.Schema(
+  {
+    username: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    isAdmin: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
-schema.methods.matchPassword = async function (password) {
+userSchema.methods.matchPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-schema.methods.generateToken = async function () {
+userSchema.pre("save", async function (next) {
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
+userSchema.methods.generateToken = async function () {
   const { _id, email, username } = this;
 
   return jwt.sign(
@@ -36,9 +49,4 @@ schema.methods.generateToken = async function () {
   );
 };
 
-schema.pre("save", async function (next) {
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-});
-
-module.exports = mongoose.model("User", schema);
+module.exports = mongoose.model("User", userSchema);
