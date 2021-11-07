@@ -1,33 +1,32 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import PostItem from "./PostItem";
+import { PlusCircleIcon } from "@heroicons/react/solid";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
 
-  const fetchData = async () => {
-    const res = await axios.get("/api/posts");
-    setPosts(res.data);
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get("/api/posts");
+      setPosts(res.data);
+    };
+
     fetchData();
   }, []);
 
   return (
-    <div>
-      <h1>Posts</h1>
+    <main>
+      <h1>
+        <Link to="/create-post" className="flex items-center gap-x-1">
+          <PlusCircleIcon className="w-8 h-8" /> Create a Post
+        </Link>
+      </h1>
       {posts.map((post) => (
-        <div key={post._id}>
-          <div>
-            {post.url ? <a href={post.url}>{post.title}</a> : <>{post.title}</>}
-          </div>
-          <div>{post.body}</div>
-          <div>
-            <a href={`/post/${post._id}`}>comments {post.comments.length}</a>
-          </div>
-        </div>
+        <PostItem key={post._id} post={post} />
       ))}
-    </div>
+    </main>
   );
 };
 

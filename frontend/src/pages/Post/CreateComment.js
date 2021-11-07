@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { Formik, Form } from "formik";
 import TextArea from "../../ui/TextArea";
+import Error from "../../ui/Error";
+import SubmitButtom from "../../ui/SubmitButton";
 import * as Yup from "yup";
 
 const CommentSchema = Yup.object().shape({
@@ -39,12 +41,10 @@ const CreateComment = ({ postId, setPost }) => {
       onSubmit={(values, actions) => handleSubmit(values, actions)}
       validationSchema={CommentSchema}
     >
-      <Form>
-        <TextArea label="Comment" id="text" name="text" type="text" />
-        <button type="submit" disabled={loading}>
-          Post
-        </button>
-        {error && <div className="error">{error}</div>}
+      <Form className="space-y-3 mb-3">
+        <TextArea label="Comment" id="text" name="text" type="text" rows={2} />
+        <SubmitButtom loading={loading}>Post</SubmitButtom>
+        {error && <Error error={error} />}
       </Form>
     </Formik>
   );

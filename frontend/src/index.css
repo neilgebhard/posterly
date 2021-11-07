@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.09' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+@layer base {
+  main {
+    @apply max-w-xl mx-auto my-8;
+  }
+  h1 {
+    @apply text-3xl font-bold mb-2;
+  }
+  h2 {
+    @apply text-2xl font-bold mb-2;
+  }
+  h3 {
+    @apply text-xl font-bold mb-2;
+  }
+  h4 {
+    @apply text-lg font-bold mb-2;
+  }
+  a {
+    @apply text-indigo-700 hover:text-indigo-500;
+  }
+  label {
+    @apply font-semibold;
+  }
+}

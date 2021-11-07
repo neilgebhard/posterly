@@ -2,6 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+heroku local web
+git add .
+git commit -m "Added a Procfile."
+heroku login
+heroku create
+git push heroku main
+heroku open
+
 ## Available Scripts
 
 In the project directory, you can run:

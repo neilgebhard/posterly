@@ -1,23 +1,25 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../../context/Auth";
 import CreateComment from "./CreateComment";
-import { useAuth } from "../../AuthContext";
+import PostItem from "../PostItem";
 import Comment from "./Comment";
+import Error from "../../ui/Error";
 
 const Post = () => {
-  const { _id } = useParams();
+  const { _id: postId } = useParams();
+  const authContext = useAuth();
+  const isAuthenticated = authContext.isAuthenticated();
   const [post, setPost] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const authContext = useAuth();
-  const isAuthenticated = authContext.isAuthenticated();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const res = await axios.get(`/api/posts/${_id}`);
+        const res = await axios.get(`/api/posts/${postId}`);
         setPost(res.data);
         setIsLoading(false);
       } catch (e) {
@@ -28,19 +30,21 @@ const Post = () => {
     };
 
     fetchData();
-  }, []);
+  }, [postId]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <main>
+        <h1>Loading...</h1>
+      </main>
+    );
   }
 
   return (
-    <>
+    <main>
       <h1>Comments</h1>
-      <div>{post?.title}</div>
-      <div>{post?.body}</div>
-      <div>Posted by {post?.username}</div>
-      {error && <div>error</div>}
+      {post && <PostItem post={post} />}
+      {error && <Error error={error} />}
       {isAuthenticated && (
         <CreateComment postId={post?._id} setPost={setPost} />
       )}
@@ -52,7 +56,7 @@ const Post = () => {
           setPost={setPost}
         />
       ))}
-    </>
+    </main>
   );
 };
 

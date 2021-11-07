@@ -6,13 +6,12 @@ import Posts from "./pages/Posts";
 import Post from "./pages/Post";
 import CreatePost from "./pages/CreatePost";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./App.css";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = process.env.REACT_APP_apiURL;
 
-function App() {
+const App = () => {
   return (
     <Router>
       <Navbar />
@@ -20,7 +19,7 @@ function App() {
         <Route path="/create-post">
           <CreatePost />
         </Route>
-        <Route path="/post/:_id">
+        <Route path="/posts/:_id">
           <Post />
         </Route>
         <Route path="/profile">
@@ -38,6 +37,6 @@ function App() {
       </Switch>
     </Router>
   );
-}
+};
 
 export default App;

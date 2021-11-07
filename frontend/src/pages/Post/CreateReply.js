@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { Formik, Form } from "formik";
 import TextArea from "../../ui/TextArea";
+import SubmitButton from "../../ui/SubmitButton";
+import Error from "../../ui/Error";
 import * as Yup from "yup";
 
 const ReplySchema = Yup.object().shape({
@@ -43,12 +45,10 @@ const CreateReply = ({ comment, postId, setPost, setIsReplying }) => {
       onSubmit={(values, actions) => handleSubmit(values, actions)}
       validationSchema={ReplySchema}
     >
-      <Form>
-        <TextArea label="Reply" id="text" name="text" type="text" />
-        <button type="submit" disabled={loading}>
-          reply
-        </button>
-        {error && <div className="error">{error}</div>}
+      <Form className="space-y-3 mb-3">
+        <TextArea label="Reply" id="text" name="text" type="text" rows={1} />
+        <SubmitButton disabled={loading}>Reply</SubmitButton>
+        {error && <Error error={error} />}
       </Form>
     </Formik>
   );

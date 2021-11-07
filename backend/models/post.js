@@ -37,7 +37,7 @@ const postSchema = mongoose.Schema(
       ref: "User",
     },
     title: { type: String, required: true },
-    body: { type: String, required: true },
+    body: { type: String },
     url: { type: String },
     comments: [commentSchema],
   },
