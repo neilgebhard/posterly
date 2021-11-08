@@ -4,24 +4,17 @@ const asyncHandler = require("express-async-handler");
 const protect = require("../middleware/protect");
 const Post = require("../models/post");
 
-// TODO: add seeds
-
-// get posts * DONE
-
-// get post * DONE
-// add post * DONE
+// TODO:
 // update post
 // delete post
 
-// add comment * DONE
 // delete comment
-// updated comment
+// update comment
 
-// add reply *
 // delete reply
 // update reply
 
-// TODO: add search, pagination
+// add search, pagination
 router.get(
   "/posts",
   asyncHandler(async (req, res) => {
