@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import PostItem from "./PostItem";
+import PostItem from "../components/PostItem";
 import { PlusCircleIcon } from "@heroicons/react/solid";
 
 const Posts = () => {
@@ -16,15 +16,24 @@ const Posts = () => {
     fetchData();
   }, []);
 
+  const removePost = (id) => {
+    const updatedPosts = posts.filter((post) => post._id !== id);
+    setPosts(updatedPosts);
+  };
+
   return (
     <main>
       <h1>
-        <Link to="/create-post" className="flex items-center gap-x-1">
+        <Link
+          id="create-post-link"
+          to="/create-post"
+          className="flex items-center gap-x-1"
+        >
           <PlusCircleIcon className="w-8 h-8" /> Create a Post
         </Link>
       </h1>
       {posts.map((post) => (
-        <PostItem key={post._id} post={post} />
+        <PostItem key={post._id} post={post} removePost={removePost} />
       ))}
     </main>
   );

@@ -3,6 +3,7 @@ const router = express.Router();
 const asyncHandler = require("express-async-handler");
 const User = require("../models/user");
 
+// Create a user
 router.post(
   "/signup",
   asyncHandler(async (req, res) => {
@@ -35,6 +36,7 @@ router.post(
   })
 );
 
+// Login a user
 router.post(
   "/login",
   asyncHandler(async (req, res) => {
@@ -54,6 +56,7 @@ router.post(
   })
 );
 
+// Logout a user
 router.post("/logout", (req, res) => {
   res
     .clearCookie("token")

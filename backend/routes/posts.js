@@ -6,15 +6,14 @@ const Post = require("../models/post");
 
 // TODO:
 // update post
-// delete post
 
-// delete comment
 // update comment
 
-// delete reply
 // update reply
 
 // add search, pagination
+
+// Get all posts
 router.get(
   "/posts",
   asyncHandler(async (req, res) => {
@@ -23,6 +22,7 @@ router.get(
   })
 );
 
+// Get a post
 router.get(
   "/posts/:postId",
   asyncHandler(async (req, res) => {
@@ -36,6 +36,7 @@ router.get(
   })
 );
 
+// Create a post
 router.post(
   "/posts",
   protect,
@@ -51,6 +52,22 @@ router.post(
   })
 );
 
+// Delete a post
+router.delete(
+  "/posts/:postId",
+  asyncHandler(async (req, res) => {
+    const post = await Post.findById(req.params.postId);
+
+    if (post) {
+      await post.remove();
+      res.json({ message: "Post removed" });
+    } else {
+      return res.status(404).json({ message: "Post doesn't exist." });
+    }
+  })
+);
+
+// Create a comment
 router.post(
   "/posts/:postId/comment",
   asyncHandler(async (req, res) => {
@@ -68,23 +85,24 @@ router.post(
   })
 );
 
-router.post(
-  "/posts/:postId/comment",
+// Delete a comment
+router.delete(
+  "/posts/:postId/comment/:commentId",
   asyncHandler(async (req, res) => {
-    const { postId } = req.params;
-    const { text } = req.body;
-    const { username } = req.user;
-    const post = await Post.findOne({ _id: postId });
+    const { postId, commentId } = req.params;
+
+    const post = await Post.findById(postId);
     if (post) {
-      post.comments.push({ text, username, user: req.user._id });
-      const updatedPost = await post.save();
-      res.json(updatedPost);
+      const comment = post.comments.id(commentId);
+      await comment.remove();
+      res.json({ message: "Comment removed" });
     } else {
       return res.status(404).json({ message: "Post doesn't exist." });
     }
   })
 );
 
+// Create a reply
 router.post(
   "/posts/:postId/comment/:commentId/reply",
   asyncHandler(async (req, res) => {
@@ -97,6 +115,24 @@ router.post(
       comment.replies.push({ text, username, user: req.user._id });
       const updatedPost = await post.save();
       res.json(updatedPost);
+    } else {
+      return res.status(404).json({ message: "Post doesn't exist." });
+    }
+  })
+);
+
+// Delete a reply
+router.delete(
+  "/posts/:postId/comment/:commentId/reply/:replyId",
+  asyncHandler(async (req, res) => {
+    const { postId, commentId, replyId } = req.params;
+
+    const post = await Post.findById(postId);
+    if (post) {
+      const comment = post.comments.id(commentId);
+      const reply = comment.replies.id(replyId);
+      await reply.remove();
+      res.json({ message: "Reply removed" });
     } else {
       return res.status(404).json({ message: "Post doesn't exist." });
     }

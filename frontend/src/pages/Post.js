@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useAuth } from "../../context/Auth";
-import CreateComment from "./CreateComment";
-import PostItem from "../PostItem";
-import Comment from "./Comment";
-import Error from "../../ui/Error";
+import { useAuth } from "../context/Auth";
+import CreateComment from "../components/CreateComment";
+import PostItem from "../components/PostItem";
+import Comment from "../components/Comment";
+import Error from "../ui/Error";
 
 const Post = () => {
   const { _id: postId } = useParams();

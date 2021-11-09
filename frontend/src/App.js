@@ -2,7 +2,7 @@ import Navbar from "./Navbar";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
-import Posts from "./pages/Posts";
+import Home from "./pages/Home";
 import Post from "./pages/Post";
 import CreatePost from "./pages/CreatePost";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -32,7 +32,7 @@ const App = () => {
           <Login />
         </Route>
         <Route path="/">
-          <Posts />
+          <Home />
         </Route>
       </Switch>
     </Router>

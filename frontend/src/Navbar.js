@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/solid";
 import { Menu, Transition } from "@headlessui/react";
 import { useHistory } from "react-router-dom";
+import Flex from "./ui/Flex";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -34,22 +35,20 @@ const Navbar = () => {
   return (
     <nav className="bg-white">
       <div className="max-w-7xl mx-auto px-2 flex items-center justify-between h-16 text-xl font-medium">
-        <div>
-          <Link to="/" className="flex items-center gap-x-0">
-            <BookmarkIcon className="h-8 w-8" />
-            Home
-          </Link>
-        </div>
+        <Link to="/" className="flex items-center gap-x-0">
+          <BookmarkIcon className="h-8 w-8" />
+          Home
+        </Link>
         <div className="flex align-middle space-x-4">
           {isAuthenticated ? (
             <Menu as="div" className="ml-3 relative">
               <div>
                 <Menu.Button>
-                  <div className="flex items-center gap-x-1 hover:text-gray-600">
+                  <Flex className="hover:text-gray-600">
                     <UserCircleIcon className="h-6 w-6 inline" />
                     <span>{username}</span>
                     <ChevronDownIcon className="w-6 h-6" />
-                  </div>
+                  </Flex>
                 </Menu.Button>
               </div>
               <Transition
@@ -96,6 +95,7 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
+                id="login-link"
                 className="border-indigo-600 border-2 px-4 py-1 rounded-md"
               >
                 Login

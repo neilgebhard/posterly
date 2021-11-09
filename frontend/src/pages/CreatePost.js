@@ -60,7 +60,11 @@ const CreatePost = () => {
             />
             <TextArea label="Body" id="body" name="body" type="text" />
             <TextInput label="URL" id="url" name="url" type="text" />
-            <SubmitButton loading={loading} className="text-2xl">
+            <SubmitButton
+              id="create-post-btn"
+              loading={loading}
+              className="text-2xl"
+            >
               Create post
             </SubmitButton>
             {error && <Error error={error} />}

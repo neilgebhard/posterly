@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
 import { Formik, Form } from "formik";
-import TextArea from "../../ui/TextArea";
-import SubmitButton from "../../ui/SubmitButton";
-import Error from "../../ui/Error";
+import TextArea from "../ui/TextArea";
+import SubmitButton from "../ui/SubmitButton";
+import Error from "../ui/Error";
 import * as Yup from "yup";
 
 const ReplySchema = Yup.object().shape({

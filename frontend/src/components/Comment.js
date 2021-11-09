@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "../../context/Auth";
+import { useAuth } from "../context/Auth";
 import CreateReply from "./CreateReply";
 import Reply from "./Reply";
 import { ChatAlt2Icon } from "@heroicons/react/solid";
