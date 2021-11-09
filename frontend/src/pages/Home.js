@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import PostItem from "../components/PostItem";
+import Post from "../components/Post";
 import { PlusCircleIcon } from "@heroicons/react/solid";
 
 const Posts = () => {
@@ -33,7 +33,7 @@ const Posts = () => {
         </Link>
       </h1>
       {posts.map((post) => (
-        <PostItem key={post._id} post={post} removePost={removePost} />
+        <Post key={post._id} post={post} removePost={removePost} />
       ))}
     </main>
   );

@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "./context/Auth";
+import { useAuth } from "../context/Auth";
 import axios from "axios";
 import {
   BookmarkIcon,
@@ -9,7 +9,7 @@ import {
 } from "@heroicons/react/solid";
 import { Menu, Transition } from "@headlessui/react";
 import { useHistory } from "react-router-dom";
-import Flex from "./ui/Flex";
+import Flex from "../ui/Flex";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");

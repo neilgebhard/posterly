@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../context/Auth";
 import CreateComment from "../components/CreateComment";
-import PostItem from "../components/PostItem";
+import PostItem from "../components/Post";
 import Comment from "../components/Comment";
 import Error from "../ui/Error";
 

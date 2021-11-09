@@ -3,18 +3,23 @@ import Flex from "../ui/Flex";
 import { ChatAltIcon, TrashIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import { useAuth } from "../context/Auth";
 
 const PostItem = ({ post, removePost }) => {
+  const AuthContext = useAuth();
+  const { username } = AuthContext.auth;
   const handleDelete = async () => {
     await axios.delete(`/api/posts/${post._id}`);
     removePost(post._id);
   };
 
   const numComments = post?.comments.reduce((acc, comment) => {
-    return comment.replies.length + 1;
+    return acc + comment.replies.length + 1;
   }, 0);
 
   const createdAt = moment(post.createdAt).fromNow();
+
+  const isPostedByUser = post.username === username;
 
   return (
     <div key={post._id} className="bg-white p-4 mb-4 rounded">
@@ -36,15 +41,17 @@ const PostItem = ({ post, removePost }) => {
           <ChatAltIcon className="w-4 h-4" />
           <div>{numComments} comments</div>
         </Link>
-        <Flex
-          id="delete-btn"
-          className="text-gray-400 hover:text-gray-500 cursor"
-          role="button"
-          onClick={handleDelete}
-        >
-          <TrashIcon className="w-4 h-4" />
-          <span>delete</span>
-        </Flex>
+        {isPostedByUser && (
+          <Flex
+            id="delete-btn"
+            className="text-gray-400 hover:text-gray-500 cursor"
+            role="button"
+            onClick={handleDelete}
+          >
+            <TrashIcon className="w-4 h-4" />
+            <span>delete</span>
+          </Flex>
+        )}
       </div>
     </div>
   );
