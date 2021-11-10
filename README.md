@@ -66,9 +66,10 @@ $ npx nyc report --reporter=lcov
 
 You can use the following commands to seed or clear the database with data found in `/backend/config/db.js`:
 
-````# Import data
+```
+# Import data
 npm run data:import
 
 # Destroy data
-npm run data:destroy```
-````
+npm run data:destroy
+```
