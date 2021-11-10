@@ -18,7 +18,10 @@ const CreateComment = ({ postId, setPost }) => {
     try {
       setLoading(true);
       setError("");
-      const { data } = await axios.post(`/api/posts/${postId}/comment`, values);
+      const { data } = await axios.post(
+        `/api/posts/${postId}/comments`,
+        values
+      );
       setPost(data);
       setLoading(false);
       actions.resetForm({
@@ -42,8 +45,16 @@ const CreateComment = ({ postId, setPost }) => {
       validationSchema={CommentSchema}
     >
       <Form className="space-y-3 mb-3">
-        <TextArea label="Comment" id="text" name="text" type="text" rows={2} />
-        <SubmitButtom loading={loading}>Post</SubmitButtom>
+        <TextArea
+          id="comment-text"
+          label="Comment"
+          name="text"
+          type="text"
+          rows={2}
+        />
+        <SubmitButtom id="submit-btn" loading={loading}>
+          Post
+        </SubmitButtom>
         {error && <Error error={error} />}
       </Form>
     </Formik>

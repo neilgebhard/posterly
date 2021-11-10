@@ -8,6 +8,7 @@ import { useAuth } from "../context/Auth";
 const PostItem = ({ post, removePost }) => {
   const AuthContext = useAuth();
   const { username } = AuthContext.auth;
+
   const handleDelete = async () => {
     await axios.delete(`/api/posts/${post._id}`);
     removePost(post._id);
@@ -19,7 +20,7 @@ const PostItem = ({ post, removePost }) => {
 
   const createdAt = moment(post.createdAt).fromNow();
 
-  const isPostedByUser = post.username === username;
+  const isByUser = post.username === username;
 
   return (
     <div key={post._id} className="bg-white p-4 mb-4 rounded">
@@ -35,13 +36,14 @@ const PostItem = ({ post, removePost }) => {
 
       <div className="flex items-center justify-between">
         <Link
+          id="comment-link"
           to={`/posts/${post._id}`}
           className="text-gray-400 hover:text-gray-500 flex items-center gap-x-1"
         >
           <ChatAltIcon className="w-4 h-4" />
           <div>{numComments} comments</div>
         </Link>
-        {isPostedByUser && (
+        {isByUser && (
           <Flex
             id="delete-btn"
             className="text-gray-400 hover:text-gray-500 cursor"

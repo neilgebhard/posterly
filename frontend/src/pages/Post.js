@@ -12,33 +12,22 @@ const Post = () => {
   const authContext = useAuth();
   const isAuthenticated = authContext.isAuthenticated();
   const [post, setPost] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const fetchPost = async () => {
+    try {
+      const res = await axios.get(`/api/posts/${postId}`);
+      setPost(res.data);
+    } catch (e) {
+      const { data } = e.response;
+      setError(data.message);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const res = await axios.get(`/api/posts/${postId}`);
-        setPost(res.data);
-        setIsLoading(false);
-      } catch (e) {
-        setIsLoading(false);
-        const { data } = e.response;
-        setError(data.message);
-      }
-    };
-
-    fetchData();
-  }, [postId]);
-
-  if (isLoading) {
-    return (
-      <main>
-        <h1>Loading...</h1>
-      </main>
-    );
-  }
+    fetchPost();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <main>
@@ -54,6 +43,7 @@ const Post = () => {
           comment={comment}
           postId={post._id}
           setPost={setPost}
+          fetchPost={fetchPost}
         />
       ))}
     </main>

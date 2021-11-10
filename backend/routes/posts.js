@@ -69,7 +69,7 @@ router.delete(
 
 // Create a comment
 router.post(
-  "/posts/:postId/comment",
+  "/posts/:postId/comments",
   asyncHandler(async (req, res) => {
     const { postId } = req.params;
     const { text } = req.body;
@@ -87,14 +87,14 @@ router.post(
 
 // Delete a comment
 router.delete(
-  "/posts/:postId/comment/:commentId",
+  "/posts/:postId/comments/:commentId",
   asyncHandler(async (req, res) => {
     const { postId, commentId } = req.params;
 
     const post = await Post.findById(postId);
     if (post) {
-      const comment = post.comments.id(commentId);
-      await comment.remove();
+      post.comments.id(commentId).remove();
+      await post.save();
       res.json({ message: "Comment removed" });
     } else {
       return res.status(404).json({ message: "Post doesn't exist." });
@@ -104,7 +104,7 @@ router.delete(
 
 // Create a reply
 router.post(
-  "/posts/:postId/comment/:commentId/reply",
+  "/posts/:postId/comments/:commentId/replies",
   asyncHandler(async (req, res) => {
     const { postId, commentId } = req.params;
     const { text } = req.body;
@@ -123,15 +123,14 @@ router.post(
 
 // Delete a reply
 router.delete(
-  "/posts/:postId/comment/:commentId/reply/:replyId",
+  "/posts/:postId/comments/:commentId/replies/:replyId",
   asyncHandler(async (req, res) => {
     const { postId, commentId, replyId } = req.params;
 
     const post = await Post.findById(postId);
     if (post) {
-      const comment = post.comments.id(commentId);
-      const reply = comment.replies.id(replyId);
-      await reply.remove();
+      post.comments.id(commentId).replies.id(replyId).remove();
+      await post.save();
       res.json({ message: "Reply removed" });
     } else {
       return res.status(404).json({ message: "Post doesn't exist." });

@@ -6,7 +6,7 @@
 
 ## General info
 
-This repository holds the source code for a MERN Reddit clone that incorporates authentication, posts, comments, and replies. Deployment is on Heroku.
+This repository holds the source code for a Reddit clone employing the MERN stack -- MongoDB, Express, React, and Node. It incorporates authentication, posts, comments, and replies. Deployment is on Heroku.
 
 ## Technologies
 
@@ -24,14 +24,14 @@ Some libraries this project is created with:
 
 To run this project locally, install using npm install. You'll need to create a .env file at the root of the project and at the root of /frontend.
 
-/.env
+`/.env`
 
-NODE_ENV=development
+`NODE_ENV=development
 JWT_SECRET=<secure JWT secret>
 DB_URI=<MongoDB URI>
-PORT=3001
+PORT=3001`
 
-frontend/.env
+`frontend/.env`
 
 REACT_APP_apiURL=http://localhost:3001
 
@@ -39,4 +39,25 @@ REACT_APP_apiURL=http://localhost:3001
 $ cd ./mern-reddit
 $ npm install
 $ npm run dev
+```
+
+# Testing
+
+Tests are written in the /frontend/cypress/integration directory.
+
+```
+$ npm run cypress
+```
+
+After running the tests, you can can see the coverage report using nyc:
+
+```
+# see just the coverage summary
+$ npx nyc report --reporter=text-summary
+
+# see just the coverage file by file
+$ npx nyc report --reporter=text
+
+# save the HTML report again
+$ npx nyc report --reporter=lcov
 ```

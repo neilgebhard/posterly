@@ -21,7 +21,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "craco -r @cypress/instrument-cra start",
     "build": "craco build",
     "test": "craco test",
     "cypress": "cypress open",
@@ -47,7 +47,8 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/cypress": "^8.0.1",
+    "@cypress/code-coverage": "^3.9.11",
+    "@cypress/instrument-cra": "^1.4.0",
     "autoprefixer": "^9.8.8",
     "cypress": "^8.7.0",
     "postcss": "^7.0.39",

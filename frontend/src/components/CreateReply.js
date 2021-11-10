@@ -10,7 +10,7 @@ const ReplySchema = Yup.object().shape({
   text: Yup.string().required("Enter a reply."),
 });
 
-const CreateReply = ({ comment, postId, setPost, setIsReplying }) => {
+const CreateReply = ({ comment, postId, fetchPost, setIsReplying }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -18,11 +18,11 @@ const CreateReply = ({ comment, postId, setPost, setIsReplying }) => {
     try {
       setLoading(true);
       setError("");
-      const { data } = await axios.post(
-        `/api/posts/${postId}/comment/${comment._id}/reply`,
+      await axios.post(
+        `/api/posts/${postId}/comments/${comment._id}/replies`,
         values
       );
-      setPost(data);
+      fetchPost();
       setLoading(false);
       setIsReplying(false);
       actions.resetForm({
@@ -32,6 +32,7 @@ const CreateReply = ({ comment, postId, setPost, setIsReplying }) => {
       });
     } catch (e) {
       setLoading(false);
+      console.log(e);
       const { data } = e.response;
       setError(data.message);
     }
@@ -46,8 +47,16 @@ const CreateReply = ({ comment, postId, setPost, setIsReplying }) => {
       validationSchema={ReplySchema}
     >
       <Form className="space-y-3 mb-3">
-        <TextArea label="Reply" id="text" name="text" type="text" rows={1} />
-        <SubmitButton disabled={loading}>Reply</SubmitButton>
+        <TextArea
+          id="reply-text"
+          label="Reply"
+          name="text"
+          type="text"
+          rows={1}
+        />
+        <SubmitButton id="submit-btn" disabled={loading}>
+          Reply
+        </SubmitButton>
         {error && <Error error={error} />}
       </Form>
     </Formik>
