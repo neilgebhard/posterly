@@ -1,4 +1,4 @@
-## MERN Reddit clone
+# MERN Reddit clone
 
 - [General info](#general-info)
 - [Technologies](#technologies)
@@ -26,10 +26,10 @@ To run this project locally, install using npm install. You'll need to create a 
 
 `/.env`
 
-`NODE_ENV=development
+NODE_ENV=development
 JWT_SECRET=<secure JWT secret>
 DB_URI=<MongoDB URI>
-PORT=3001`
+PORT=3001
 
 `frontend/.env`
 
@@ -41,7 +41,7 @@ $ npm install
 $ npm run dev
 ```
 
-# Testing
+## Testing
 
 Tests are written in the /frontend/cypress/integration directory.
 
@@ -61,3 +61,14 @@ $ npx nyc report --reporter=text
 # save the HTML report again
 $ npx nyc report --reporter=lcov
 ```
+
+## Seed database
+
+You can use the following commands to seed or clear the database with data found in `/backend/config/db.js`:
+
+````# Import data
+npm run data:import
+
+# Destroy data
+npm run data:destroy```
+````
