@@ -32,9 +32,11 @@ const Posts = () => {
           <PlusCircleIcon className="w-8 h-8" /> Create a Post
         </Link>
       </h1>
-      {posts.map((post) => (
-        <Post key={post._id} post={post} removePost={removePost} />
-      ))}
+      <ul>
+        {posts.map((post) => (
+          <Post key={post._id} post={post} removePost={removePost} />
+        ))}
+      </ul>
     </main>
   );
 };

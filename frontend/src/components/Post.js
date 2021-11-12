@@ -6,8 +6,7 @@ import moment from "moment";
 import { useAuth } from "../context/Auth";
 
 const PostItem = ({ post, removePost }) => {
-  const AuthContext = useAuth();
-  const { username } = AuthContext.auth;
+  const { username } = useAuth().auth;
 
   const handleDelete = async () => {
     await axios.delete(`/api/posts/${post._id}`);
@@ -19,11 +18,10 @@ const PostItem = ({ post, removePost }) => {
   }, 0);
 
   const createdAt = moment(post.createdAt).fromNow();
-
   const isByUser = post.username === username;
 
   return (
-    <div key={post._id} className="bg-white p-4 mb-4 rounded">
+    <li key={post._id} className="bg-white p-4 mb-4 rounded">
       <Flex className="gap-x-2">
         <div className="text-gray-400 text-xs">Posted by {post.username}</div>
         <div className="text-gray-400">·</div>
@@ -55,7 +53,7 @@ const PostItem = ({ post, removePost }) => {
           </Flex>
         )}
       </div>
-    </div>
+    </li>
   );
 };
 

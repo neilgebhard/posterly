@@ -9,8 +9,7 @@ import Error from "../ui/Error";
 
 const Post = () => {
   const { _id: postId } = useParams();
-  const authContext = useAuth();
-  const isAuthenticated = authContext.isAuthenticated();
+  const isAuthenticated = useAuth().isAuthenticated();
   const [post, setPost] = useState(null);
   const [error, setError] = useState("");
 
@@ -37,15 +36,17 @@ const Post = () => {
       {isAuthenticated && (
         <CreateComment postId={post?._id} setPost={setPost} />
       )}
-      {post?.comments.map((comment) => (
-        <Comment
-          key={comment._id}
-          comment={comment}
-          postId={post._id}
-          setPost={setPost}
-          fetchPost={fetchPost}
-        />
-      ))}
+      <ul>
+        {post?.comments.map((comment) => (
+          <Comment
+            key={comment._id}
+            comment={comment}
+            postId={post._id}
+            setPost={setPost}
+            fetchPost={fetchPost}
+          />
+        ))}
+      </ul>
     </main>
   );
 };

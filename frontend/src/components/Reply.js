@@ -5,10 +5,8 @@ import { useAuth } from "../context/Auth";
 import { TrashIcon } from "@heroicons/react/solid";
 
 const Reply = ({ reply, fetchPost, postId, commentId }) => {
-  const AuthContext = useAuth();
-  const { username } = AuthContext.auth;
+  const { username } = useAuth().auth;
   const createdAt = moment(reply.createdAt).fromNow();
-
   const isByUser = reply.username === username;
 
   const handleDelete = async () => {
@@ -19,7 +17,7 @@ const Reply = ({ reply, fetchPost, postId, commentId }) => {
   };
 
   return (
-    <div key={reply._id} className="ml-10 bg-white p-4">
+    <li key={reply._id} className="ml-10 bg-white p-4">
       <Flex className="gap-x-2">
         <div className="text-sm font-semibold">{reply.username}</div>
         <div className="text-gray-400">·</div>
@@ -39,7 +37,7 @@ const Reply = ({ reply, fetchPost, postId, commentId }) => {
           </Flex>
         )}
       </div>
-    </div>
+    </li>
   );
 };
 

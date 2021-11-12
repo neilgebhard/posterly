@@ -24,11 +24,10 @@ const Comment = ({ comment, postId, fetchPost }) => {
   };
 
   const createdAt = moment(comment.createdAt).fromNow();
-
   const isByUser = comment.username === username;
 
   return (
-    <div className="space-y-2 mt-2">
+    <li className="space-y-2 mt-2">
       <div className="bg-white p-4">
         <div className="flex items-center gap-x-2">
           <div className="text-sm font-semibold">{comment.username}</div>
@@ -69,16 +68,19 @@ const Comment = ({ comment, postId, fetchPost }) => {
           fetchPost={fetchPost}
         />
       )}
-      {comment.replies.map((reply) => (
-        <Reply
-          key={reply._id}
-          reply={reply}
-          postId={postId}
-          commentId={comment._id}
-          fetchPost={fetchPost}
-        />
-      ))}
-    </div>
+
+      <ul>
+        {comment.replies.map((reply) => (
+          <Reply
+            key={reply._id}
+            reply={reply}
+            postId={postId}
+            commentId={comment._id}
+            fetchPost={fetchPost}
+          />
+        ))}
+      </ul>
+    </li>
   );
 };
 
