@@ -27,10 +27,12 @@ To run this project locally, install using npm install. You'll need to create a 
 
 `/.env`
 
+```
 NODE_ENV=development
 JWT_SECRET=<secure JWT secret>
 DB_URI=<MongoDB URI>
 PORT=3001
+```
 
 `frontend/.env`
 
@@ -44,9 +46,10 @@ $ npm run dev
 
 ## Testing
 
-Tests are written in the /frontend/cypress/integration directory.
+Tests are written in app.spec.js in the `/frontend/cypress/integration` directory.
 
 ```
+$ cd /frontend
 $ npm run cypress
 ```
 
