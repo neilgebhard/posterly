@@ -77,3 +77,9 @@ npm run data:import
 # Destroy data
 npm run data:destroy
 ```
+
+## Demo
+
+The live demo is deployed on Heroku: https://neilsreddit.herokuapp.com/
+
+![Homepage screenshot](screenshot.png)
