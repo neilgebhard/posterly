@@ -25,14 +25,14 @@ const PostItem = ({ post, removePost }) => {
       <Flex className="gap-x-2">
         <div className="text-gray-400 text-xs">Posted by {post.username}</div>
         <div className="text-gray-400">·</div>
-        <div className="text-gray-400 text-xs">{createdAt}</div>
+        <time className="text-gray-400 text-xs">{createdAt}</time>
       </Flex>
-      <div className="text-2xl text-bold font-semibold">
+      <h3 className="text-2xl text-bold font-semibold">
         {post.url ? <a href={post.url}>{post.title}</a> : <>{post.title}</>}
-      </div>
-      <div>{post.body}</div>
+      </h3>
+      <p>{post.body}</p>
 
-      <div className="flex items-center justify-between">
+      <Flex className="justify-between">
         <Link
           id="comment-link"
           to={`/posts/${post._id}`}
@@ -52,7 +52,7 @@ const PostItem = ({ post, removePost }) => {
             <span>delete</span>
           </Flex>
         )}
-      </div>
+      </Flex>
     </li>
   );
 };

@@ -14,10 +14,6 @@ const Comment = ({ comment, postId, fetchPost }) => {
   const isAuthenticated = authContext.isAuthenticated();
   const { username } = authContext.auth;
 
-  const handleClick = () => {
-    setIsReplying((isReplying) => !isReplying);
-  };
-
   const handleDelete = async () => {
     await axios.delete(`/api/posts/${postId}/comments/${comment._id}`);
     fetchPost();
@@ -32,15 +28,15 @@ const Comment = ({ comment, postId, fetchPost }) => {
         <div className="flex items-center gap-x-2">
           <div className="text-sm font-semibold">{comment.username}</div>
           <div className="text-gray-400">·</div>
-          <div className="text-gray-400 text-xs">{createdAt}</div>
+          <time className="text-gray-400 text-xs">{createdAt}</time>
         </div>
-        <div className="text-lg">{comment.text}</div>
+        <p className="text-lg">{comment.text}</p>
         <div className="flex items-center justify-between">
           {isAuthenticated && (
             <button
               id="reply-btn"
               type="button"
-              onClick={handleClick}
+              onClick={() => setIsReplying((isReplying) => !isReplying)}
               className="flex items-center gap-x-1 text-gray-400"
             >
               <ChatAlt2Icon className="w-5 h-5" />
@@ -68,8 +64,7 @@ const Comment = ({ comment, postId, fetchPost }) => {
           fetchPost={fetchPost}
         />
       )}
-
-      <ul>
+      <ul className="space-y-2">
         {comment.replies.map((reply) => (
           <Reply
             key={reply._id}

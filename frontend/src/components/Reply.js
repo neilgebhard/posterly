@@ -21,11 +21,11 @@ const Reply = ({ reply, fetchPost, postId, commentId }) => {
       <Flex className="gap-x-2">
         <div className="text-sm font-semibold">{reply.username}</div>
         <div className="text-gray-400">·</div>
-        <div className="text-gray-400 text-xs">{createdAt}</div>
+        <time className="text-gray-400 text-xs">{createdAt}</time>
       </Flex>
-      <div>{reply.text}</div>
-      <div className="flex justify-end">
-        {isByUser && (
+      <p>{reply.text}</p>
+      {isByUser && (
+        <Flex className="justify-end">
           <Flex
             id="delete-btn"
             className="text-gray-400 hover:text-gray-500 cursor"
@@ -35,8 +35,8 @@ const Reply = ({ reply, fetchPost, postId, commentId }) => {
             <TrashIcon className="w-4 h-4" />
             <span>delete</span>
           </Flex>
-        )}
-      </div>
+        </Flex>
+      )}
     </li>
   );
 };
