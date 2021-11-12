@@ -19,6 +19,7 @@ Some libraries this project is created with:
 - react-router-dom: 5.3.0
 - formik: 2.2.9
 - yup: 0.32.11
+- tailwindcss
 
 ## Setup
 

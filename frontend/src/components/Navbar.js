@@ -41,7 +41,7 @@ const Navbar = () => {
         </Link>
         <div className="flex align-middle space-x-4">
           {isAuthenticated ? (
-            <Menu as="div" className="ml-3 relative">
+            <Menu id="profile-menu" as="div" className="ml-3 relative">
               <div>
                 <Menu.Button>
                   <Flex className="hover:text-gray-600">
@@ -64,6 +64,7 @@ const Navbar = () => {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
+                        id="profile-btn"
                         to="/profile"
                         className={classNames(
                           active ? "bg-gray-100" : "",
@@ -78,13 +79,14 @@ const Navbar = () => {
                     {({ active }) => (
                       // eslint-disable-next-line
                       <a
+                        role="button"
                         onClick={handleLogout}
                         className={classNames(
                           active ? "bg-gray-100" : "",
                           "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
                         )}
                       >
-                        Sign out
+                        Log out
                       </a>
                     )}
                   </Menu.Item>
@@ -101,6 +103,7 @@ const Navbar = () => {
                 Login
               </Link>
               <Link
+                id="signup-link"
                 to="/signup"
                 className="text-white hover:text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-400 px-4 py-1 rounded-md"
               >

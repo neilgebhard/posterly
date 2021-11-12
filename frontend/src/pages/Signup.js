@@ -55,20 +55,21 @@ const Signup = () => {
         >
           <Form className="mt-8 space-y-6">
             <TextInput
-              label="Username"
               id="username"
+              label="Username"
               name="username"
               type="text"
               autoFocus
             />
             <TextInput label="Email" id="email" name="email" type="text" />
             <TextInput
-              label="Password"
               id="password"
+              label="Password"
               name="password"
               type="password"
             />
             <button
+              id="signup-btn"
               type="submit"
               disabled={loading}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-2xl font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
