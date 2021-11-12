@@ -20,6 +20,7 @@ Some libraries this project is created with:
 - formik: 2.2.9
 - yup: 0.32.11
 - tailwindcss
+- Cypress: 8.7.0
 
 ## Setup
 
