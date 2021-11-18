@@ -1,5 +1,7 @@
 # MERN Reddit clone
 
+**_Currently a work in progress_**
+
 - [General info](#general-info)
 - [Technologies](#technologies)
 - [Setup](#setup)
