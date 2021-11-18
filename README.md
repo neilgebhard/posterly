@@ -24,7 +24,7 @@ Some libraries this project is created with:
 
 ## Setup
 
-To run this project locally, install using npm install. You'll need to create a .env file at the root of the project and at the root of /frontend.
+To run this project locally, install dependencies using npm install. You'll need to create a .env file at the root of the project and at the root of /frontend.
 
 `/.env`
 
@@ -37,7 +37,11 @@ PORT=3001
 
 `frontend/.env`
 
+```
 REACT_APP_apiURL=http://localhost:3001
+```
+
+Install dependencies using npm:
 
 ```
 $ cd ./mern-reddit
@@ -82,5 +86,25 @@ npm run data:destroy
 ## Demo
 
 The live demo is deployed on Heroku: https://neilsreddit.herokuapp.com/
+
+To log in to Heroku in terminal:
+
+```
+heroku login
+```
+
+To test app before deploying to Heroku servers:
+
+```
+heroku local web
+```
+
+To deploy to Heroku:
+
+```
+heroku create
+git push heroku main
+heroku open
+```
 
 ![Homepage screenshot](screenshot.png)

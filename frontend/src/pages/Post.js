@@ -5,7 +5,7 @@ import { useAuth } from "../context/Auth";
 import CreateComment from "../components/CreateComment";
 import PostItem from "../components/Post";
 import Comment from "../components/Comment";
-import Error from "../ui/Error";
+import Error from "../components/Error";
 
 const Post = () => {
   const { _id: postId } = useParams();

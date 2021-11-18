@@ -1,9 +1,9 @@
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/Auth";
+import CreatedAt from "./CreatedAt";
 import Flex from "../ui/Flex";
 import { ChatAltIcon, TrashIcon } from "@heroicons/react/solid";
-import { Link } from "react-router-dom";
-import moment from "moment";
-import { useAuth } from "../context/Auth";
 
 const PostItem = ({ post, removePost }) => {
   const { username } = useAuth().auth;
@@ -17,7 +17,6 @@ const PostItem = ({ post, removePost }) => {
     return acc + comment.replies.length + 1;
   }, 0);
 
-  const createdAt = moment(post.createdAt).fromNow();
   const isByUser = post.username === username;
 
   return (
@@ -25,7 +24,7 @@ const PostItem = ({ post, removePost }) => {
       <Flex className="gap-x-2">
         <div className="text-gray-400 text-xs">Posted by {post.username}</div>
         <div className="text-gray-400">·</div>
-        <time className="text-gray-400 text-xs">{createdAt}</time>
+        <CreatedAt createdAt={post.createdAt} />
       </Flex>
       <h3 className="text-2xl text-bold font-semibold">
         {post.url ? <a href={post.url}>{post.title}</a> : <>{post.title}</>}

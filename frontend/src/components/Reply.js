@@ -1,12 +1,11 @@
 import axios from "axios";
-import moment from "moment";
-import Flex from "../ui/Flex";
 import { useAuth } from "../context/Auth";
+import CreatedAt from "./CreatedAt";
+import Flex from "../ui/Flex";
 import { TrashIcon } from "@heroicons/react/solid";
 
 const Reply = ({ reply, fetchPost, postId, commentId }) => {
   const { username } = useAuth().auth;
-  const createdAt = moment(reply.createdAt).fromNow();
   const isByUser = reply.username === username;
 
   const handleDelete = async () => {
@@ -21,7 +20,7 @@ const Reply = ({ reply, fetchPost, postId, commentId }) => {
       <Flex className="gap-x-2">
         <div className="text-sm font-semibold">{reply.username}</div>
         <div className="text-gray-400">·</div>
-        <time className="text-gray-400 text-xs">{createdAt}</time>
+        <CreatedAt createdAt={reply.createdAt} />
       </Flex>
       <p>{reply.text}</p>
       {isByUser && (

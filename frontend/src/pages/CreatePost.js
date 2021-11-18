@@ -6,7 +6,7 @@ import { useAuth } from "../context/Auth";
 import TextInput from "../ui/TextInput";
 import TextArea from "../ui/TextArea";
 import SubmitButton from "../ui/SubmitButton";
-import Error from "../ui/Error";
+import Error from "../components/Error";
 import * as Yup from "yup";
 
 const PostSchema = Yup.object().shape({

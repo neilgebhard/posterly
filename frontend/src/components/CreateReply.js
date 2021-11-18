@@ -3,14 +3,14 @@ import { useState } from "react";
 import { Formik, Form } from "formik";
 import TextArea from "../ui/TextArea";
 import SubmitButton from "../ui/SubmitButton";
-import Error from "../ui/Error";
+import Error from "../components/Error";
 import * as Yup from "yup";
 
 const ReplySchema = Yup.object().shape({
   text: Yup.string().required("Enter a reply."),
 });
 
-const CreateReply = ({ comment, postId, fetchPost, setIsReplying }) => {
+const CreateReply = ({ comment, postId, fetchPost, setShowReply }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -24,7 +24,7 @@ const CreateReply = ({ comment, postId, fetchPost, setIsReplying }) => {
       );
       fetchPost();
       setLoading(false);
-      setIsReplying(false);
+      setShowReply(false);
       actions.resetForm({
         values: {
           text: "",

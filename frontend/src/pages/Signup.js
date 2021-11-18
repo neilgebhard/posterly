@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from "../context/Auth";
 import { Formik, Form } from "formik";
 import TextInput from "../ui/TextInput";
-import Error from "../ui/Error";
+import Error from "../components/Error";
 import * as Yup from "yup";
 import { LockClosedIcon } from "@heroicons/react/solid";
 

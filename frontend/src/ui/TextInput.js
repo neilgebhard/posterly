@@ -1,5 +1,5 @@
 import { useField } from "formik";
-import Error from "./Error";
+import Error from "../components/Error";
 
 const TextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
