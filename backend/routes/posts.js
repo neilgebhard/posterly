@@ -4,15 +4,6 @@ const asyncHandler = require("express-async-handler");
 const protect = require("../middleware/protect");
 const Post = require("../models/post");
 
-// TODO:
-// update post
-
-// update comment
-
-// update reply
-
-// add search, pagination
-
 // Get all posts
 router.get(
   "/posts",
@@ -135,6 +126,77 @@ router.delete(
     } else {
       return res.status(404).json({ message: "Post doesn't exist." });
     }
+  })
+);
+
+// Upvote a post
+router.post(
+  "/posts/:postId/upvote",
+  protect,
+  asyncHandler(async (req, res) => {
+    const post = await Post.findOneAndUpdate(
+      { _id: req.params.postId },
+      {
+        $addToSet: { upvotes: req.user._id },
+        $pull: { downvotes: req.user._id },
+      },
+      { new: true }
+    );
+
+    res.json(post);
+  })
+);
+
+// Downvote a post
+router.post(
+  "/posts/:postId/downvote",
+  protect,
+  asyncHandler(async (req, res) => {
+    const post = await Post.findOneAndUpdate(
+      { _id: req.params.postId },
+      {
+        $pull: { upvotes: req.user._id },
+        $addToSet: { downvotes: req.user._id },
+      },
+      { new: true }
+    );
+
+    const posts = await Post.find();
+    res.json(posts);
+  })
+);
+
+// Cancel an upvote
+router.post(
+  "/posts/:postId/upvote/cancel",
+  protect,
+  asyncHandler(async (req, res) => {
+    const post = await Post.findOneAndUpdate(
+      { _id: req.params.postId },
+      {
+        $pull: { upvotes: req.user._id },
+      },
+      { new: true }
+    );
+
+    res.json(post);
+  })
+);
+
+// Cancel a downvote
+router.post(
+  "/posts/:postId/downvote/cancel",
+  protect,
+  asyncHandler(async (req, res) => {
+    const post = await Post.findOneAndUpdate(
+      { _id: req.params.postId },
+      {
+        $pull: { downvotes: req.user._id },
+      },
+      { new: true }
+    );
+
+    res.json(post);
   })
 );
 

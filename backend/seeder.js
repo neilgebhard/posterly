@@ -20,6 +20,9 @@ const importData = async () => {
     const adminUser = createdUsers[0]._id;
 
     const samplePosts = posts.map((post) => {
+      post.comments = post.comments.map((comment) => {
+        return { ...comment, user: adminUser };
+      });
       return { ...post, user: adminUser };
     });
 
@@ -28,7 +31,7 @@ const importData = async () => {
     console.log("Data Imported!");
     process.exit();
   } catch (error) {
-    console.error(`${error}`.red.inverse);
+    console.error(error);
     process.exit(1);
   }
 };

@@ -8,21 +8,46 @@
 
 ## General info
 
-This repository holds the source code for a Reddit clone employing the MERN stack -- MongoDB, Express, React, and Node. It incorporates authentication, posts, comments, and replies. Deployment is on Heroku.
+This repository holds the source code for a Reddit clone employing the MERN stack -- MongoDB, Express, React, and Node.
+
+Features so far:
+
+- Authentication: signup, login, logout, and persistence
+- Posts: adding and deleting posts
+- Comments: adding and deleting comments to posts
+- Replies: adding and deleting deplies to comments
+- Votes: upvoting and downvoting posts
+
+And that's it so far!
 
 ## Technologies
 
-Some libraries this project is created with:
+Some frameworks and libraries this project is made with:
 
-- Express: 4.17.1
-- mongoose: 6.0.11
+Frontend:
+
 - React: 17.0.2
-- jsonwebtoken: 8.5.1
+- Tailwind CSS
 - react-router-dom: 5.3.0
 - formik: 2.2.9
 - yup: 0.32.11
-- tailwindcss
+
+Backend:
+
+- MongoDB
+- Express: 4.17.1
+- mongoose: 6.0.11
+- JSON web tokens
+
+Testing:
+
 - Cypress: 8.7.0
+
+Deployment:
+
+- Heroku
+
+Note: I wish I started this project with TypeScript.
 
 ## Setup
 
@@ -108,5 +133,3 @@ heroku create
 git push heroku main
 heroku open
 ```
-
-![Homepage screenshot](screenshot.png)

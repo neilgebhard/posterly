@@ -51,21 +51,31 @@ const CreatePost = () => {
         >
           <Form className="space-y-6">
             <h1>Create a post</h1>
+            <hr className="border-white" />
             <TextInput
-              label="Title"
               id="title"
               name="title"
               type="text"
-              autoFocus
+              placeholder="Title"
             />
-            <TextArea label="Body" id="body" name="body" type="text" />
-            <TextInput label="URL" id="url" name="url" type="text" />
+            <TextArea
+              id="body"
+              name="body"
+              type="text"
+              placeholder="Text (optional)"
+            />
+            <TextInput
+              id="url"
+              name="url"
+              type="text"
+              placeholder="URL (optional)"
+            />
             <SubmitButton
               id="create-post-btn"
               loading={loading}
-              className="text-2xl"
+              className="text-base float-right"
             >
-              Create post
+              POST
             </SubmitButton>
             {error && <Error error={error} />}
           </Form>

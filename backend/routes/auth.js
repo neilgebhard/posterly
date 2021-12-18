@@ -26,8 +26,8 @@ router.post(
         httpOnly: true,
         secure: true,
       });
-      const { username, email, isAdmin } = user;
-      res.status(201).json({ username, email, isAdmin });
+      const { _id, username, email, isAdmin } = user;
+      res.status(201).json({ _id, username, email, isAdmin });
     } else {
       res
         .status(400)
@@ -48,8 +48,8 @@ router.post(
         httpOnly: true,
         secure: true,
       });
-      const { username, email, isAdmin } = user;
-      res.json({ username, email, isAdmin });
+      const { _id, username, email, isAdmin } = user;
+      res.json({ _id, username, email, isAdmin });
     } else {
       return res.status(401).json({ message: "Authentication failed." });
     }

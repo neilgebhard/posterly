@@ -8,6 +8,11 @@ module.exports = {
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        orange: {
+          DEFAULT: "#ff4500",
+        },
+      },
     },
   },
   variants: {

@@ -46,17 +46,19 @@ const CreateReply = ({ comment, postId, fetchPost, setShowReply }) => {
       onSubmit={(values, actions) => handleSubmit(values, actions)}
       validationSchema={ReplySchema}
     >
-      <Form className="space-y-3 mb-3">
+      <Form className="space-y-3 m-3">
         <TextArea
           id="reply-text"
-          label="Reply"
           name="text"
           type="text"
-          rows={1}
+          rows={3}
+          placeholder="What are your thoughts?"
         />
-        <SubmitButton id="submit-btn" disabled={loading}>
-          Reply
-        </SubmitButton>
+        <div className="flex justify-end">
+          <SubmitButton id="submit-btn" disabled={loading}>
+            Reply
+          </SubmitButton>
+        </div>
         {error && <Error error={error} />}
       </Form>
     </Formik>

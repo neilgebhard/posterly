@@ -23,18 +23,28 @@ const Posts = () => {
 
   return (
     <main>
-      <h1>
+      <div className="bg-white border border-gray-300 md:rounded mb-4">
         <Link
           id="create-post-link"
           to="/create-post"
-          className="flex items-center gap-x-1"
+          className="flex items-center gap-x-1 m-2"
         >
-          <PlusCircleIcon className="w-8 h-8" /> Create a Post
+          <PlusCircleIcon className="w-12 h-12 text-gray-300" />
+          <input
+            className="bg-gray-100 border border-gray-200 py-2 px-4 w-full hover:border-blue-600 rounded"
+            type="text"
+            placeholder="Create Post"
+          />
         </Link>
-      </h1>
+      </div>
       <ul>
         {posts.map((post) => (
-          <Post key={post._id} post={post} removePost={removePost} />
+          <Post
+            key={post._id}
+            post={post}
+            setPosts={setPosts}
+            removePost={removePost}
+          />
         ))}
       </ul>
     </main>

@@ -5,6 +5,7 @@ import TextArea from "../ui/TextArea";
 import Error from "../components/Error";
 import SubmitButtom from "../ui/SubmitButton";
 import * as Yup from "yup";
+import { useAuth } from "../context/Auth";
 
 const CommentSchema = Yup.object().shape({
   text: Yup.string().required("Enter a comment."),
@@ -13,6 +14,7 @@ const CommentSchema = Yup.object().shape({
 const CreateComment = ({ postId, setPost }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const { username } = useAuth().auth;
 
   const handleSubmit = async (values, actions) => {
     try {
@@ -47,14 +49,20 @@ const CreateComment = ({ postId, setPost }) => {
       <Form className="space-y-3 mb-3">
         <TextArea
           id="comment-text"
-          label="Comment"
+          label={`Comment as ${username}`}
           name="text"
           type="text"
           rows={2}
         />
-        <SubmitButtom id="submit-btn" loading={loading}>
-          Post
-        </SubmitButtom>
+        <div className="sm:flex sm:justify-end">
+          <SubmitButtom
+            id="submit-btn"
+            className="w-full sm:w-auto"
+            loading={loading}
+          >
+            Comment
+          </SubmitButtom>
+        </div>
         {error && <Error error={error} />}
       </Form>
     </Formik>

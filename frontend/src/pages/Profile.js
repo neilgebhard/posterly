@@ -4,6 +4,7 @@ import Flex from "../ui/Flex";
 
 const Profile = () => {
   const { username, email } = useAuth().auth;
+
   return (
     <main className="bg-white p-5 text-2xl font-semibold space-y-2">
       <h1 className="mb-5">Profile</h1>

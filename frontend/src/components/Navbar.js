@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/Auth";
 import axios from "axios";
 import {
-  BookmarkIcon,
   UserCircleIcon,
   ChevronDownIcon,
+  QuestionMarkCircleIcon,
 } from "@heroicons/react/solid";
 import { Menu, Transition } from "@headlessui/react";
 import { useHistory } from "react-router-dom";
@@ -34,10 +34,10 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white">
-      <div className="max-w-7xl mx-auto px-2 flex items-center justify-between h-16 text-xl font-medium">
+      <div className="max-w-7xl mx-auto px-2 flex items-center justify-between py-2 text-xl font-medium">
         <Link to="/" className="flex items-center gap-x-0">
-          <BookmarkIcon className="h-8 w-8" />
-          Home
+          <QuestionMarkCircleIcon className="h-8 w-8 text-orange" />
+          <h1 className="text-xl mb-0">reddit</h1>
         </Link>
         <div className="flex align-middle space-x-4">
           {isAuthenticated ? (
@@ -95,20 +95,24 @@ const Navbar = () => {
             </Menu>
           ) : (
             <>
-              <Link
-                to="/login"
-                id="login-link"
-                className="border-indigo-600 border-2 px-4 py-1 rounded-md"
-              >
-                Login
-              </Link>
-              <Link
-                id="signup-link"
-                to="/signup"
-                className="text-white hover:text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-400 px-4 py-1 rounded-md"
-              >
-                Signup
-              </Link>
+              <Flex>
+                <Link
+                  to="/login"
+                  id="login-link"
+                  className="text-base border-blue-600 text-blue-600 border-2 px-10 py-1 rounded-full"
+                >
+                  Log In
+                </Link>
+              </Flex>
+              <Flex>
+                <Link
+                  id="signup-link"
+                  to="/signup"
+                  className="text-white text-base hover:text-white bg-blue-600 hover:bg-blue-500 active:bg-indigo-400 px-10 py-1 rounded-full"
+                >
+                  Sign Up
+                </Link>
+              </Flex>
             </>
           )}
         </div>

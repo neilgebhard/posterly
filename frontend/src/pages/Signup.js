@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../context/Auth";
 import { Formik, Form } from "formik";
 import TextInput from "../ui/TextInput";
@@ -40,10 +40,8 @@ const Signup = () => {
 
   return (
     <main className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <section className="max-w-md w-full space-y-8">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Sign up for an account
-        </h2>
+      <section className="sm:max-w-md w-full space-y-8">
+        <h1 className="mt-6 text-center text-3xl font-bold">Sign up</h1>
         <Formik
           initialValues={{
             username: "",
@@ -59,7 +57,6 @@ const Signup = () => {
               label="Username"
               name="username"
               type="text"
-              autoFocus
             />
             <TextInput label="Email" id="email" name="email" type="text" />
             <TextInput
@@ -72,11 +69,11 @@ const Signup = () => {
               id="signup-btn"
               type="submit"
               disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-2xl font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-2xl font-medium rounded-full text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <LockClosedIcon
-                  className="h-8 w-8 text-indigo-500 group-hover:text-indigo-400"
+                  className="h-8 w-8 text-blue-500 group-hover:text-blue-400"
                   aria-hidden="true"
                 />
               </span>
@@ -85,6 +82,16 @@ const Signup = () => {
             {error && <Error error={error} />}
           </Form>
         </Formik>
+        <p className="text-xs">
+          Already a redditor?{" "}
+          <Link
+            className="font-bold text-blue-500 hover:text-blue-400"
+            to="/login"
+          >
+            LOG IN
+          </Link>
+          .
+        </p>
       </section>
     </main>
   );
