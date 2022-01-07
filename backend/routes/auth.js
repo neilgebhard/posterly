@@ -3,7 +3,9 @@ const router = express.Router();
 const asyncHandler = require("express-async-handler");
 const User = require("../models/user");
 
-// Create a user
+// @route    post /signup
+// @desc     Create a user
+// @access   Public
 router.post(
   "/signup",
   asyncHandler(async (req, res) => {
@@ -36,7 +38,9 @@ router.post(
   })
 );
 
-// Login a user
+// @route    post /login
+// @desc     Login a user
+// @access   Public
 router.post(
   "/login",
   asyncHandler(async (req, res) => {

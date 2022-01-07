@@ -4,7 +4,9 @@ const asyncHandler = require("express-async-handler");
 const protect = require("../middleware/protect");
 const Post = require("../models/post");
 
-// Get all posts
+// @route    get /posts
+// @desc     Get all posts
+// @access   Public
 router.get(
   "/posts",
   asyncHandler(async (req, res) => {
@@ -13,7 +15,9 @@ router.get(
   })
 );
 
-// Get a post
+// @route    get /posts/:postId
+// @desc     Get a post
+// @access   Public
 router.get(
   "/posts/:postId",
   asyncHandler(async (req, res) => {
@@ -27,7 +31,9 @@ router.get(
   })
 );
 
-// Create a post
+// @route    post /posts
+// @desc     Create a post
+// @access   Private
 router.post(
   "/posts",
   protect,
@@ -43,9 +49,12 @@ router.post(
   })
 );
 
-// Delete a post
+// @route    delete /posts/:postId
+// @desc     Delete a post
+// @access   Private
 router.delete(
   "/posts/:postId",
+  protect,
   asyncHandler(async (req, res) => {
     const post = await Post.findById(req.params.postId);
 
@@ -58,9 +67,12 @@ router.delete(
   })
 );
 
-// Create a comment
+// @route    post /posts/:postId/comments
+// @desc     Create a comment
+// @access   Private
 router.post(
   "/posts/:postId/comments",
+  protect,
   asyncHandler(async (req, res) => {
     const { postId } = req.params;
     const { text } = req.body;
@@ -76,9 +88,12 @@ router.post(
   })
 );
 
-// Delete a comment
+// @route    post /posts/:postId/comments/:commentId
+// @desc     Delete a comment
+// @access   Private
 router.delete(
   "/posts/:postId/comments/:commentId",
+  protect,
   asyncHandler(async (req, res) => {
     const { postId, commentId } = req.params;
 
@@ -93,9 +108,12 @@ router.delete(
   })
 );
 
-// Create a reply
+// @route    post /posts/:postId/comments/:commentId/replies
+// @desc     Create a reply
+// @access   Private
 router.post(
   "/posts/:postId/comments/:commentId/replies",
+  protect,
   asyncHandler(async (req, res) => {
     const { postId, commentId } = req.params;
     const { text } = req.body;
@@ -112,9 +130,12 @@ router.post(
   })
 );
 
-// Delete a reply
+// @route    delete /posts/:postId/comments/:commentId/replies/:replyId
+// @desc     Delete a reply
+// @access   Private
 router.delete(
   "/posts/:postId/comments/:commentId/replies/:replyId",
+  protect,
   asyncHandler(async (req, res) => {
     const { postId, commentId, replyId } = req.params;
 
@@ -129,7 +150,9 @@ router.delete(
   })
 );
 
-// Upvote a post
+// @route    post /posts/:postId/upvote
+// @desc     Upvote a post
+// @access   Private
 router.post(
   "/posts/:postId/upvote",
   protect,
@@ -147,7 +170,9 @@ router.post(
   })
 );
 
-// Downvote a post
+// @route    post /posts/:postId/downvote
+// @desc     Downvote a post
+// @access   Private
 router.post(
   "/posts/:postId/downvote",
   protect,
@@ -166,7 +191,9 @@ router.post(
   })
 );
 
-// Cancel an upvote
+// @route    post /posts/:postId/upvote/cancel
+// @desc     Cancel an upvote
+// @access   Private
 router.post(
   "/posts/:postId/upvote/cancel",
   protect,
@@ -183,7 +210,9 @@ router.post(
   })
 );
 
-// Cancel a downvote
+// @route    post /posts/:postId/downvote/cancel
+// @desc     Cancel a downvote
+// @access   Private
 router.post(
   "/posts/:postId/downvote/cancel",
   protect,
