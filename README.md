@@ -112,7 +112,7 @@ npm run data:destroy
 
 ## Demo
 
-The live demo is deployed on Heroku: https://neilsreddit.herokuapp.com/
+The live demo is deployed on Heroku: https://neilsreddit.herokuapp.com/. Feel free to make an account, add posts, comments, and replies!
 
 To log in to Heroku in terminal:
 
@@ -130,6 +130,6 @@ To deploy to Heroku:
 
 ```
 heroku create
-git push heroku main
+git push heroku master
 heroku open
 ```
