@@ -21,7 +21,7 @@ const CommentSchema = Yup.object().shape({
 
 const CreateComment = ({ postId, setPost }: AppProps) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
   const { username } = useAuth().auth;
 
   const handleSubmit = async (
@@ -30,7 +30,7 @@ const CreateComment = ({ postId, setPost }: AppProps) => {
   ) => {
     try {
       setLoading(true);
-      setError(false);
+      setError("");
       const { data }: { data: Post } = await axios.post(
         `/api/posts/${postId}/comments`,
         values
@@ -45,7 +45,7 @@ const CreateComment = ({ postId, setPost }: AppProps) => {
     } catch (e: any) {
       setLoading(false);
       const { data } = e.response;
-      setError(data.message);
+      setError(data);
     }
   };
 

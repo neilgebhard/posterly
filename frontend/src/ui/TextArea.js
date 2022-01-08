@@ -1,6 +1,6 @@
 import { useField } from "formik";
 
-const TextArea = ({ label, ...props }) => {
+const TextArea = ({ label = "", ...props }) => {
   const [field, meta] = useField(props);
   return (
     <div>

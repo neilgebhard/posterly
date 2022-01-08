@@ -1,4 +1,9 @@
-const SubmitButton = ({ children, loading, className = "", ...rest }) => {
+const SubmitButton = ({
+  children,
+  loading = false,
+  className = "",
+  ...rest
+}) => {
   return (
     <button
       type="submit"
