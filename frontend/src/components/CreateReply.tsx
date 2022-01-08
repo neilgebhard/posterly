@@ -27,7 +27,7 @@ const CreateReply = ({
   setShowReply,
 }: AppProps) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const handleSubmit = async (
     values: FormValues,
@@ -35,7 +35,7 @@ const CreateReply = ({
   ) => {
     try {
       setLoading(true);
-      setError(false);
+      setError("");
       await axios.post(
         `/api/posts/${postId}/comments/${comment._id}/replies`,
         values
