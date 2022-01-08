@@ -11,7 +11,7 @@ import type { Post as PostType } from "../types";
 const Post = () => {
   const { _id: postId } = useParams<{ _id: string }>();
   const isAuthenticated = useAuth().isAuthenticated();
-  const [post, setPost] = useState<PostType>({} as PostType);
+  const [post, setPost] = useState<PostType | null>(null);
   const [error, setError] = useState("");
 
   const fetchPost = async () => {
@@ -33,7 +33,7 @@ const Post = () => {
     <main>
       {post && <PostItem post={post} />}
       {error && <Error error={error} />}
-      {isAuthenticated ? (
+      {isAuthenticated && post ? (
         <CreateComment postId={post?._id} setPost={setPost} />
       ) : (
         <div className="flex flex-col gap-y-3 text-center sm:justify-between sm:flex-row bg-white border border-gray-300 py-3 px-2 mb-3">
@@ -55,7 +55,7 @@ const Post = () => {
         </div>
       )}
       <ul className="bg-white border border-gray-300 p-4">
-        {post?.comments.map((comment) => (
+        {post?.comments?.map((comment) => (
           <Comment
             key={comment._id}
             comment={comment}

@@ -7,6 +7,7 @@ import TextInput from "../ui/TextInput";
 import Error from "../components/Error";
 import * as Yup from "yup";
 import { LockClosedIcon } from "@heroicons/react/solid";
+import { User } from "../types";
 
 type FormValues = {
   email: string;
@@ -32,7 +33,7 @@ const Login = () => {
     try {
       setLoading(true);
       setError("");
-      const { data } = await axios.post("/api/login", values);
+      const { data }: { data: User } = await axios.post("/api/login", values);
       authContext.setAuthState(data);
       history.push("/");
     } catch (e: any) {

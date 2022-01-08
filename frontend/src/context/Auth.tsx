@@ -1,25 +1,36 @@
 import { useState, createContext, useContext } from "react";
+import type { User } from "../types";
 
-const AuthContext = createContext();
+type AuthContextType = {
+  auth: User;
+  setAuthState: (user: User) => void;
+  isAuthenticated: () => boolean;
+  logout: () => void;
+};
 
-function AuthProvider({ children }) {
+const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+
+type AppProps = {
+  children: React.ReactNode;
+};
+function AuthProvider({ children }: AppProps) {
   const _id = localStorage.getItem("_id");
   const username = localStorage.getItem("username");
   const email = localStorage.getItem("email");
-  const isAdmin = localStorage.getItem("isAdmin");
+  const isAdmin = !!localStorage.getItem("isAdmin");
 
-  const [auth, setAuth] = useState({
-    _id,
-    username,
-    email,
-    isAdmin,
+  const [auth, setAuth] = useState<User>({
+    _id: _id || "",
+    username: username || "",
+    email: email || "",
+    isAdmin: isAdmin || false,
   });
 
-  const setAuthState = ({ _id, username, email, isAdmin }) => {
+  const setAuthState = ({ _id, username, email, isAdmin }: User) => {
     localStorage.setItem("_id", _id);
     localStorage.setItem("username", username);
     localStorage.setItem("email", email);
-    localStorage.setItem("isAdmin", isAdmin);
+    localStorage.setItem("isAdmin", isAdmin.toString());
 
     setAuth({
       _id,
@@ -36,10 +47,10 @@ function AuthProvider({ children }) {
     localStorage.removeItem("isAdmin");
 
     setAuth({
-      _id: null,
-      username: null,
-      email: null,
-      isAdmin: null,
+      _id: "",
+      username: "",
+      email: "",
+      isAdmin: false,
     });
   };
 

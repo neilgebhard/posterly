@@ -18,7 +18,7 @@ const PostItem = ({ post, removePost }: AppProps) => {
     if (removePost) removePost(post._id);
   };
 
-  const totalComments = post?.comments.reduce((total, comment) => {
+  const totalComments = post.comments?.reduce((total, comment) => {
     return total + comment.replies.length + 1;
   }, 0);
 

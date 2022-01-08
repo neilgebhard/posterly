@@ -7,6 +7,7 @@ import TextInput from "../ui/TextInput";
 import Error from "../components/Error";
 import * as Yup from "yup";
 import { LockClosedIcon } from "@heroicons/react/solid";
+import { User } from "../types";
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
@@ -34,7 +35,7 @@ const Signup = () => {
     try {
       setLoading(true);
       setError("");
-      const { data } = await axios.post("/api/signup", values);
+      const { data }: { data: User } = await axios.post("/api/signup", values);
       authContext.setAuthState(data);
       history.push("/");
     } catch (e: any) {

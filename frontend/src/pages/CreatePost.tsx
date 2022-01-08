@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Formik, Form } from "formik";
-import { useAuth } from "../context/Auth";
 import TextInput from "../ui/TextInput";
 import TextArea from "../ui/TextArea";
 import SubmitButton from "../ui/SubmitButton";
@@ -24,7 +23,6 @@ type FormValues = {
 };
 
 const CreatePost = () => {
-  const authContext = useAuth();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -33,8 +31,7 @@ const CreatePost = () => {
     try {
       setLoading(true);
       setError("");
-      const { data } = await axios.post("/api/posts", values);
-      authContext.setAuthState(data);
+      await axios.post("/api/posts", values);
       history.push("/");
     } catch (e: any) {
       setLoading(false);
