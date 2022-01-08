@@ -8,6 +8,11 @@ import Error from "../components/Error";
 import * as Yup from "yup";
 import { LockClosedIcon } from "@heroicons/react/solid";
 
+type FormValues = {
+  email: string;
+  password: string;
+};
+
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Enter an email."),
   password: Yup.string().required("Enter a password."),
@@ -16,17 +21,21 @@ const LoginSchema = Yup.object().shape({
 const Login = () => {
   const authContext = useAuth();
   const history = useHistory();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
-  const handleSubmit = async (values) => {
+  const initialValues: FormValues = {
+    email: "",
+    password: "",
+  };
+  const handleSubmit = async (values: FormValues) => {
     try {
       setLoading(true);
       setError("");
       const { data } = await axios.post("/api/login", values);
       authContext.setAuthState(data);
       history.push("/");
-    } catch (e) {
+    } catch (e: any) {
       setLoading(false);
       const { data } = e.response;
       setError(data.message);
@@ -38,10 +47,7 @@ const Login = () => {
       <section className="sm:max-w-md w-full space-y-8">
         <h1 className="mt-6 text-center text-3xl font-bold">Login</h1>
         <Formik
-          initialValues={{
-            email: "",
-            password: "",
-          }}
+          initialValues={initialValues}
           onSubmit={(values) => handleSubmit(values)}
           validationSchema={LoginSchema}
         >

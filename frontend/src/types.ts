@@ -6,7 +6,7 @@ export type Post = {
   title: string;
   comments: Comment[];
   upvotes: string[];
-  downvotes: null[];
+  downvotes: string[];
   createdAt: string;
   updatedAt: string;
 };

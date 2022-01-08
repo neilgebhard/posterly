@@ -3,21 +3,22 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Post from "../components/Post";
 import { PlusCircleIcon } from "@heroicons/react/solid";
+import type { Post as PostType } from "../types";
 
 const Posts = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<PostType[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios.get("/api/posts");
+    const fetchPosts = async () => {
+      const res: { data: PostType[] } = await axios.get("/api/posts");
       setPosts(res.data);
     };
 
-    fetchData();
+    fetchPosts();
   }, []);
 
-  const removePost = (id) => {
-    const updatedPosts = posts.filter((post) => post._id !== id);
+  const removePost = (id: string) => {
+    const updatedPosts: PostType[] = posts.filter((post) => post._id !== id);
     setPosts(updatedPosts);
   };
 
@@ -39,12 +40,7 @@ const Posts = () => {
       </div>
       <ul>
         {posts.map((post) => (
-          <Post
-            key={post._id}
-            post={post}
-            setPosts={setPosts}
-            removePost={removePost}
-          />
+          <Post key={post._id} post={post} removePost={removePost} />
         ))}
       </ul>
     </main>

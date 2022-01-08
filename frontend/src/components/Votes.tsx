@@ -28,7 +28,6 @@ const Votes = ({ post }: AppProps) => {
     if (isUpvoted) {
       setVotes((votes) => votes - 1);
       setUpvoted(false);
-
       // cancel upvote
       await axios.post(`/api/posts/${post._id}/upvote/cancel`);
     } else if (isDownvoted) {
