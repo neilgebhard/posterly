@@ -9,10 +9,11 @@ import type { Post } from "../types";
 
 type AppProps = {
   post: Post;
+  isPostPage?: boolean;
   removePost?: (postId: string) => void;
 };
 
-const PostItem = ({ post, removePost }: AppProps) => {
+const PostItem = ({ post, removePost, isPostPage }: AppProps) => {
   const handleDelete = async () => {
     await axios.delete(`/api/posts/${post._id}`);
     if (removePost) removePost(post._id);
@@ -32,33 +33,38 @@ const PostItem = ({ post, removePost }: AppProps) => {
         <div className="text-gray-400 text-xs mb-2">
           Posted by u/{post.username} <CreatedAt createdAt={post.createdAt} />
         </div>
-        <h2 className="text-xl font-medium">
+        <h2 className="text-xl font-medium hover:underline">
           {post.url ? (
             <a href={post.url}>{post.title}</a>
           ) : (
             <Link to={`/posts/${post._id}`}>{post.title}</Link>
           )}
         </h2>
+        {isPostPage && post.body && (
+          <p className="mb-2 border py-2 px-1 rounded">{post.body}</p>
+        )}
         <Flex className="justify-between">
           <Link to={`/posts/${post._id}`}>
             <div className="text-gray-400 hover:text-gray-500 flex items-center gap-x-1">
               <ChatAltIcon className="w-5 h-5" />
-              <div className="text-xs font-semibold">
+              <div className="text-xs font-semibold hover:underline">
                 {totalComments} Comments
               </div>
             </div>
           </Link>
-          <IfUser username={post.username}>
-            <Flex
-              id="delete-btn"
-              className="text-gray-400 hover:text-gray-500 cursor"
-              role="button"
-              onClick={handleDelete}
-            >
-              <TrashIcon className="w-4 h-4" />
-              <span>delete</span>
-            </Flex>
-          </IfUser>
+          {!isPostPage && (
+            <IfUser username={post.username}>
+              <Flex
+                id="delete-btn"
+                className="text-gray-400 hover:text-gray-500 hover:underline cursor text-sm font-semibold"
+                role="button"
+                onClick={handleDelete}
+              >
+                <TrashIcon className="w-4 h-4" />
+                <span>delete</span>
+              </Flex>
+            </IfUser>
+          )}
         </Flex>
       </div>
     </li>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../context/Auth";
 import CreateComment from "../components/CreateComment";
@@ -14,7 +14,7 @@ const Post = () => {
   const [post, setPost] = useState<PostType | null>(null);
   const [error, setError] = useState("");
 
-  const fetchPost = async () => {
+  const fetchPost = useCallback(async () => {
     try {
       const res: { data: PostType } = await axios.get(`/api/posts/${postId}`);
       setPost(res.data);
@@ -22,16 +22,15 @@ const Post = () => {
       const { data } = e.response;
       setError(data.message);
     }
-  };
+  }, [postId]);
 
   useEffect(() => {
     fetchPost();
-    // eslint-disable-next-line
-  }, []);
+  }, [fetchPost]);
 
   return (
     <main>
-      {post && <PostItem post={post} />}
+      {post && <PostItem post={post} isPostPage={true} />}
       {error && <Error error={error} />}
       {isAuthenticated && post ? (
         <CreateComment postId={post?._id} setPost={setPost} />
