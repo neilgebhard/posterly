@@ -7,7 +7,7 @@ import CreateReply from "./CreateReply";
 import Reply from "./Reply";
 import CreatedAt from "./CreatedAt";
 import ReplyButton from "./ReplyButton";
-import type { Comment as CommentType, Post } from "../types";
+import type { Comment as CommentType } from "../types";
 
 type AppProps = {
   comment: CommentType;

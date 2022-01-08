@@ -6,21 +6,32 @@ import Error from "../components/Error";
 import SubmitButtom from "../ui/SubmitButton";
 import * as Yup from "yup";
 import { useAuth } from "../context/Auth";
+import type { Post } from "../types";
+
+type AppProps = {
+  postId: string;
+  setPost: (post: Post) => void;
+};
+
+type FormValues = { text: string };
 
 const CommentSchema = Yup.object().shape({
   text: Yup.string().required("Enter a comment."),
 });
 
-const CreateComment = ({ postId, setPost }) => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+const CreateComment = ({ postId, setPost }: AppProps) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const { username } = useAuth().auth;
 
-  const handleSubmit = async (values, actions) => {
+  const handleSubmit = async (
+    values: FormValues,
+    actions: { resetForm: (values: {}) => void }
+  ) => {
     try {
       setLoading(true);
-      setError("");
-      const { data } = await axios.post(
+      setError(false);
+      const { data }: { data: Post } = await axios.post(
         `/api/posts/${postId}/comments`,
         values
       );
@@ -31,18 +42,17 @@ const CreateComment = ({ postId, setPost }) => {
           text: "",
         },
       });
-    } catch (e) {
+    } catch (e: any) {
       setLoading(false);
       const { data } = e.response;
       setError(data.message);
     }
   };
 
+  const initialValues: FormValues = { text: "" };
   return (
     <Formik
-      initialValues={{
-        text: "",
-      }}
+      initialValues={initialValues}
       onSubmit={(values, actions) => handleSubmit(values, actions)}
       validationSchema={CommentSchema}
     >
