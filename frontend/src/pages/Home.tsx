@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Post from "../components/Post";
+import Post from "../components/PostItem";
 import { PlusCircleIcon } from "@heroicons/react/solid";
 import type { Post as PostType } from "../types";
 

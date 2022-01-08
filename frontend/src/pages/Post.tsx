@@ -3,10 +3,10 @@ import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../context/Auth";
 import CreateComment from "../components/CreateComment";
-import PostItem from "../components/Post";
-import Comment from "../components/Comment";
+import PostItem from "../components/PostItem";
 import Error from "../components/Error";
 import type { Post as PostType } from "../types";
+import CommentList from "../components/CommentList";
 
 const Post = () => {
   const { _id: postId } = useParams<{ _id: string }>();
@@ -53,16 +53,7 @@ const Post = () => {
           </div>
         </div>
       )}
-      <ul className="bg-white border border-gray-300 p-4">
-        {post?.comments?.map((comment) => (
-          <Comment
-            key={comment._id}
-            comment={comment}
-            postId={post._id}
-            fetchPost={fetchPost}
-          />
-        ))}
-      </ul>
+      {post && <CommentList post={post} fetchPost={fetchPost} />}
     </main>
   );
 };
