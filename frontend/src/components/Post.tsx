@@ -5,15 +5,21 @@ import IfUser from "./IfUser";
 import Flex from "../ui/Flex";
 import Votes from "./Votes";
 import { ChatAltIcon, TrashIcon } from "@heroicons/react/outline";
+import type { Post } from "../types";
 
-const PostItem = ({ post, removePost }) => {
+type AppProps = {
+  post: Post;
+  removePost: (postId: string) => void;
+};
+
+const PostItem = ({ post, removePost }: AppProps) => {
   const handleDelete = async () => {
     await axios.delete(`/api/posts/${post._id}`);
     removePost(post._id);
   };
 
-  const numComments = post?.comments.reduce((acc, comment) => {
-    return acc + comment.replies.length + 1;
+  const totalComments = post?.comments.reduce((total, comment) => {
+    return total + comment.replies.length + 1;
   }, 0);
 
   return (
@@ -34,7 +40,7 @@ const PostItem = ({ post, removePost }) => {
             <div className="text-gray-400 hover:text-gray-500 flex items-center gap-x-1">
               <ChatAltIcon className="w-5 h-5" />
               <div className="text-xs font-semibold">
-                {numComments} Comments
+                {totalComments} Comments
               </div>
             </div>
             <IfUser username={post.username}>

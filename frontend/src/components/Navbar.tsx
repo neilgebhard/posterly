@@ -11,7 +11,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { useHistory } from "react-router-dom";
 import Flex from "../ui/Flex";
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
@@ -26,7 +26,7 @@ const Navbar = () => {
       await axios.post("/api/logout");
       authContext.logout();
       history.push("/");
-    } catch (e) {
+    } catch (e: any) {
       const { data } = e.response;
       console.log(data);
     }

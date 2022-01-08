@@ -1,6 +1,10 @@
 import classnames from "classnames";
 
-const Flex = ({ className, ...rest }) => {
+type AppProps = {
+  className?: String,
+};
+
+const Flex = ({ className, ...rest }: AppProps) => {
   return (
     <div
       className={classnames("flex items-center gap-x-1", className)}
