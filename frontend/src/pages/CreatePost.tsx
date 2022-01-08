@@ -17,35 +17,42 @@ const PostSchema = Yup.object().shape({
   url: Yup.string().url("URL must be a valid URL."),
 });
 
+type FormValues = {
+  title: string;
+  body: string;
+  url: string;
+};
+
 const CreatePost = () => {
   const authContext = useAuth();
   const history = useHistory();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values: FormValues) => {
     try {
       setLoading(true);
       setError("");
       const { data } = await axios.post("/api/posts", values);
       authContext.setAuthState(data);
       history.push("/");
-    } catch (e) {
+    } catch (e: any) {
       setLoading(false);
       const { data } = e.response;
       setError(data.message);
     }
   };
 
+  const initialValues: FormValues = {
+    title: "",
+    body: "",
+    url: "",
+  };
   return (
     <main className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <section className="max-w-md w-full space-y-8">
         <Formik
-          initialValues={{
-            title: "",
-            body: "",
-            url: "",
-          }}
+          initialValues={initialValues}
           onSubmit={(values) => handleSubmit(values)}
           validationSchema={PostSchema}
         >

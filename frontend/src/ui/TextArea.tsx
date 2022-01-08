@@ -2,11 +2,6 @@ import { useField, Field, FieldAttributes } from "formik";
 
 type AppProps = {
   label?: string;
-  id?: string;
-  name?: string;
-  type?: string;
-  rows?: number;
-  placeholder?: string;
 } & FieldAttributes<{}>;
 
 const TextArea = ({ label = "", ...props }: AppProps) => {
