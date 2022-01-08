@@ -9,13 +9,13 @@ import type { Post } from "../types";
 
 type AppProps = {
   post: Post;
-  removePost: (postId: string) => void;
+  removePost?: (postId: string) => void;
 };
 
 const PostItem = ({ post, removePost }: AppProps) => {
   const handleDelete = async () => {
     await axios.delete(`/api/posts/${post._id}`);
-    removePost(post._id);
+    if (removePost) removePost(post._id);
   };
 
   const totalComments = post?.comments.reduce((total, comment) => {

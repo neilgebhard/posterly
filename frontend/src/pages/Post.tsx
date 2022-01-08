@@ -6,18 +6,19 @@ import CreateComment from "../components/CreateComment";
 import PostItem from "../components/Post";
 import Comment from "../components/Comment";
 import Error from "../components/Error";
+import type { Post as PostType } from "../types";
 
 const Post = () => {
-  const { _id: postId } = useParams();
+  const { _id: postId } = useParams<{ _id: string }>();
   const isAuthenticated = useAuth().isAuthenticated();
-  const [post, setPost] = useState(null);
-  const [error, setError] = useState("");
+  const [post, setPost] = useState<PostType>({} as PostType);
+  const [error, setError] = useState<string>("");
 
   const fetchPost = async () => {
     try {
-      const res = await axios.get(`/api/posts/${postId}`);
+      const res: { data: PostType } = await axios.get(`/api/posts/${postId}`);
       setPost(res.data);
-    } catch (e) {
+    } catch (e: any) {
       const { data } = e.response;
       setError(data.message);
     }
@@ -59,7 +60,6 @@ const Post = () => {
             key={comment._id}
             comment={comment}
             postId={post._id}
-            setPost={setPost}
             fetchPost={fetchPost}
           />
         ))}
