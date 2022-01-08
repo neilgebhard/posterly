@@ -26,8 +26,8 @@ type FormValues = {
 const CreatePost = () => {
   const authContext = useAuth();
   const history = useHistory();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (values: FormValues) => {
     try {

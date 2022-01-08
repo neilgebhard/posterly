@@ -18,36 +18,43 @@ const SignupSchema = Yup.object().shape({
     .required("Password is required."),
 });
 
+type FormValues = {
+  username: string;
+  email: string;
+  password: string;
+};
+
 const Signup = () => {
   const authContext = useAuth();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values: FormValues) => {
     try {
       setLoading(true);
       setError("");
       const { data } = await axios.post("/api/signup", values);
       authContext.setAuthState(data);
       history.push("/");
-    } catch (e) {
+    } catch (e: any) {
       setLoading(false);
       const { data } = e.response;
       setError(data.message);
     }
   };
 
+  const initialValues: FormValues = {
+    username: "",
+    email: "",
+    password: "",
+  };
   return (
     <main className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <section className="sm:max-w-md w-full space-y-8">
         <h1 className="mt-6 text-center text-3xl font-bold">Sign up</h1>
         <Formik
-          initialValues={{
-            username: "",
-            email: "",
-            password: "",
-          }}
+          initialValues={initialValues}
           onSubmit={(values) => handleSubmit(values)}
           validationSchema={SignupSchema}
         >

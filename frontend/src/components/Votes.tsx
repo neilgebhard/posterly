@@ -13,7 +13,7 @@ type AppProps = {
 
 const Votes = ({ post }: AppProps) => {
   const { auth } = useAuth();
-  const [votes, setVotes] = useState<number>(
+  const [votes, setVotes] = useState(
     () => post.upvotes.length - post.downvotes.length
   );
 

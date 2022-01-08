@@ -21,8 +21,8 @@ const LoginSchema = Yup.object().shape({
 const Login = () => {
   const authContext = useAuth();
   const history = useHistory();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const initialValues: FormValues = {
     email: "",

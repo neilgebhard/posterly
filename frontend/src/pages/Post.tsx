@@ -12,7 +12,7 @@ const Post = () => {
   const { _id: postId } = useParams<{ _id: string }>();
   const isAuthenticated = useAuth().isAuthenticated();
   const [post, setPost] = useState<PostType>({} as PostType);
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState("");
 
   const fetchPost = async () => {
     try {

@@ -20,8 +20,8 @@ const CommentSchema = Yup.object().shape({
 });
 
 const CreateComment = ({ postId, setPost }: AppProps) => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const { username } = useAuth().auth;
 
   const handleSubmit = async (
