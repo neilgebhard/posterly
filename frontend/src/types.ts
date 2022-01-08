@@ -2,6 +2,7 @@ export type Post = {
   _id: string;
   username: string;
   user: string;
+  url?: string;
   title: string;
   comments: Comment[];
   upvotes: string[];

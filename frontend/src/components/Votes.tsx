@@ -5,10 +5,15 @@ import {
   ArrowCircleDownIcon,
 } from "@heroicons/react/outline";
 import { useAuth } from "../context/Auth";
+import type { Post } from "../types";
 
-const Votes = ({ post, setPosts }) => {
+type AppProps = {
+  post: Post;
+};
+
+const Votes = ({ post }: AppProps) => {
   const { auth } = useAuth();
-  const [votes, setVotes] = useState(
+  const [votes, setVotes] = useState<number>(
     () => post.upvotes.length - post.downvotes.length
   );
 

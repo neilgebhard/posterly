@@ -1,6 +1,11 @@
 import { ChatAlt2Icon } from "@heroicons/react/outline";
 
-const ReplyButton = ({ children, ...rest }) => {
+type AppProps = {
+  children: React.ReactNode;
+  onClick?: () => void;
+};
+
+const ReplyButton = ({ children, ...rest }: AppProps) => {
   return (
     <button
       id="reply-btn"
