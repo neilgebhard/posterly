@@ -16,6 +16,8 @@ export type Comment = {
   user: string;
   text: string;
   replies: Reply[];
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type Reply = {
