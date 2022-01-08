@@ -1,11 +1,21 @@
-import { useField } from "formik";
+import { useField, Field, FieldAttributes } from "formik";
 
-const TextArea = ({ label = "", ...props }) => {
+type AppProps = {
+  label?: string;
+  id?: string;
+  name?: string;
+  type?: string;
+  rows?: number;
+  placeholder?: string;
+} & FieldAttributes<{}>;
+
+const TextArea = ({ label = "", ...props }: AppProps) => {
   const [field, meta] = useField(props);
   return (
     <div>
       <label htmlFor={props.id || props.name}>{label}</label>
-      <textarea
+      <Field
+        as="textarea"
         rows={3}
         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full px-3 py-2 text-base border border-gray-300 md:rounded-md"
         {...field}

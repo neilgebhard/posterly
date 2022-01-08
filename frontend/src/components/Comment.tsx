@@ -40,11 +40,11 @@ const Comment = ({ comment, postId, fetchPost }: AppProps) => {
               reply
             </ReplyButton>
           </IfLoggedIn>
-          <IfUser username={comment.username}>
-            <DeleteButton onClick={handleDelete}>delete</DeleteButton>
-          </IfUser>
         </div>
       </div>
+      <IfUser username={comment.username}>
+        <DeleteButton onClick={handleDelete}>delete</DeleteButton>
+      </IfUser>
       {showReply && (
         <CreateReply
           comment={comment}

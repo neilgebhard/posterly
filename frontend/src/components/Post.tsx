@@ -28,35 +28,39 @@ const PostItem = ({ post, removePost }: AppProps) => {
       className="bg-white md:rounded border border-gray-300 hover:border-gray-500 flex mb-3"
     >
       <Votes post={post} />
-      <Link to={`/posts/${post._id}`}>
-        <div className="p-2">
-          <div className="text-gray-400 text-xs mb-2">
-            Posted by u/{post.username} <CreatedAt createdAt={post.createdAt} />
-          </div>
-          <h2 className="text-xl font-medium">
-            {post.url ? <a href={post.url}>{post.title}</a> : <>{post.title}</>}
-          </h2>
-          <Flex className="justify-between">
+      <div className="p-2">
+        <div className="text-gray-400 text-xs mb-2">
+          Posted by u/{post.username} <CreatedAt createdAt={post.createdAt} />
+        </div>
+        <h2 className="text-xl font-medium">
+          {post.url ? (
+            <a href={post.url}>{post.title}</a>
+          ) : (
+            <Link to={`/posts/${post._id}`}>{post.title}</Link>
+          )}
+        </h2>
+        <Flex className="justify-between">
+          <Link to={`/posts/${post._id}`}>
             <div className="text-gray-400 hover:text-gray-500 flex items-center gap-x-1">
               <ChatAltIcon className="w-5 h-5" />
               <div className="text-xs font-semibold">
                 {totalComments} Comments
               </div>
             </div>
-            <IfUser username={post.username}>
-              <Flex
-                id="delete-btn"
-                className="text-gray-400 hover:text-gray-500 cursor"
-                role="button"
-                onClick={handleDelete}
-              >
-                <TrashIcon className="w-4 h-4" />
-                <span>delete</span>
-              </Flex>
-            </IfUser>
-          </Flex>
-        </div>
-      </Link>
+          </Link>
+          <IfUser username={post.username}>
+            <Flex
+              id="delete-btn"
+              className="text-gray-400 hover:text-gray-500 cursor"
+              role="button"
+              onClick={handleDelete}
+            >
+              <TrashIcon className="w-4 h-4" />
+              <span>delete</span>
+            </Flex>
+          </IfUser>
+        </Flex>
+      </div>
     </li>
   );
 };

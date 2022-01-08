@@ -1,4 +1,4 @@
-import { useField } from "formik";
+import { useField, Field } from "formik";
 import Error from "../components/Error";
 
 const TextInput = ({ label, className = "", ...props }) => {
@@ -6,7 +6,7 @@ const TextInput = ({ label, className = "", ...props }) => {
   return (
     <div>
       <label htmlFor={props.id || props.name}>{label}</label>
-      <input
+      <Field
         className={`appearance-none relative block w-full px-3 py-2 text-xl border border-gray-300 text-gray-900 md:rounded focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 ${className}`}
         {...field}
         {...props}
