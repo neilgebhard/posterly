@@ -1,24 +1,27 @@
-# MERN Reddit clone
-
-**_Currently a work in progress_**
+# Reddit clone
 
 - [General info](#general-info)
+- [Why I built the project this way](#technologies)
 - [Technologies](#technologies)
 - [Setup](#setup)
 
 ## General info
 
-This repository holds the source code for a Reddit clone employing the MERN stack -- MongoDB, Express, React, and Node.
+This repository holds the source code for a Reddit clone.
 
 Features so far:
 
 - Authentication: signup, login, logout, and persistence
 - Posts: adding and deleting posts
-- Comments: adding and deleting comments to posts
-- Replies: adding and deleting deplies to comments
+- Comments & replies: Adding and deleting comments & replies
 - Votes: upvoting and downvoting posts
 
-And that's it so far!
+## Why I built the project this way
+
+- For state management, I realized that many modern React apps aren't using Redux anymore. Therefore, I used `useState` and `Context` because I wanted to establish my foundation in React's core technologies. Not to mentino, there are many viable alternatives to Redux such as react-query, MobX, Zustand, and Recoil.
+- I used `TypeScript` because the industry seems to be gravitating toward it and it has so many benefits. Small bugs become so much easier to catch, especially ones that are masterfully hidden through JavaScript's dynamic typing. Refactoring and reiterating code becomes a breeze with TypeScript's code completion and IntelliSense.
+- Even though I'm mainly a **front-end developer**, my aim is to gain a well-rounded perspective on developing web applications. Hence, I made this app full-stack to provide myself with an optimal learning experience. For a front-end developer, there are many insights gained by developing a backend such as learning about HTTP, API design, and authentication.
+- Testing is important for ensuring that an application is working as intended for users. It helps detect and protect code from bugs as changes are made to an application. Cypress has been gaining popularity as a leading end-to-end testing framework, so I used the technology in this project. You can see some of the code I wrote using it [here](https://github.com/neilgebhard/reddit-clone/blob/master/frontend/cypress/integration/app.spec.js).
 
 ## Technologies
 
@@ -27,6 +30,7 @@ Some frameworks and libraries this project is made with:
 Frontend:
 
 - React: 17.0.2
+- TypeScript: 4.5.4
 - Tailwind CSS
 - react-router-dom: 5.3.0
 - formik: 2.2.9
@@ -46,8 +50,6 @@ Testing:
 Deployment:
 
 - Heroku
-
-Note: I wish I started this project with TypeScript.
 
 ## Setup
 
