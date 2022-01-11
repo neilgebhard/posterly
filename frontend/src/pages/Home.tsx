@@ -26,7 +26,7 @@ const Posts = () => {
     <main>
       <div className="bg-white border border-gray-300 md:rounded mb-4">
         <Link
-          id="create-post-link"
+          data-testid="create-post-link"
           to="/create-post"
           className="flex items-center gap-x-1 m-2"
         >

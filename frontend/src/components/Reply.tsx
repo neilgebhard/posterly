@@ -31,7 +31,7 @@ const Reply = ({ reply, fetchPost, postId, commentId }: AppProps) => {
       <IfUser username={reply.username}>
         <Flex className="justify-end">
           <Flex
-            id="delete-btn"
+            data-testid="delete-reply"
             className="text-gray-400 hover:text-gray-500 cursor"
             role="button"
             onClick={handleDelete}

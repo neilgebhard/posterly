@@ -65,14 +65,14 @@ const CreateReply = ({
     >
       <Form className="space-y-3 m-3">
         <TextArea
-          id="reply-text"
+          data-testid="reply-text"
           name="text"
           type="text"
           rows={3}
           placeholder="What are your thoughts?"
         />
         <div className="flex justify-end">
-          <SubmitButton id="submit-btn" disabled={loading}>
+          <SubmitButton data-testid="submit-reply" disabled={loading}>
             Reply
           </SubmitButton>
         </div>

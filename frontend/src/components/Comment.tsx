@@ -43,7 +43,9 @@ const Comment = ({ comment, postId, fetchPost }: AppProps) => {
         </div>
       </div>
       <IfUser username={comment.username}>
-        <DeleteButton onClick={handleDelete}>delete</DeleteButton>
+        <DeleteButton data-testid="delete-comment" onClick={handleDelete}>
+          delete
+        </DeleteButton>
       </IfUser>
       {showReply && (
         <CreateReply

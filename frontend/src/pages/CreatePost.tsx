@@ -57,7 +57,7 @@ const CreatePost = () => {
             <h1>Create a post</h1>
             <hr className="border-white" />
             <TextInput
-              id="title"
+              data-testid="title"
               name="title"
               type="text"
               placeholder="Title"
@@ -75,7 +75,7 @@ const CreatePost = () => {
               placeholder="URL (optional)"
             />
             <SubmitButton
-              id="create-post-btn"
+              data-testid="create-post-btn"
               loading={loading}
               className="text-base float-right"
             >

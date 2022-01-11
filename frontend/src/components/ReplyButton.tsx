@@ -8,7 +8,7 @@ type AppProps = {
 const ReplyButton = ({ children, ...rest }: AppProps) => {
   return (
     <button
-      id="reply-btn"
+      data-testid="reply-btn"
       type="button"
       {...rest}
       className="flex items-center gap-x-1 text-gray-400"

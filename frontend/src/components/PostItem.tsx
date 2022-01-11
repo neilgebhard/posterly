@@ -44,7 +44,7 @@ const PostItem = ({ post, removePost, isPostPage }: AppProps) => {
           <p className="mb-2 border py-2 px-1 rounded">{post.body}</p>
         )}
         <Flex className="justify-between">
-          <Link to={`/posts/${post._id}`}>
+          <Link data-testid="comments-link" to={`/posts/${post._id}`}>
             <div className="text-gray-400 hover:text-gray-500 flex items-center gap-x-1">
               <ChatAltIcon className="w-5 h-5" />
               <div className="text-xs font-semibold hover:underline">
@@ -55,7 +55,7 @@ const PostItem = ({ post, removePost, isPostPage }: AppProps) => {
           {!isPostPage && (
             <IfUser username={post.username}>
               <Flex
-                id="delete-btn"
+                data-testid="delete-post"
                 className="text-gray-400 hover:text-gray-500 hover:underline cursor text-sm font-semibold"
                 role="button"
                 onClick={handleDelete}

@@ -53,15 +53,20 @@ const Login = () => {
           validationSchema={LoginSchema}
         >
           <Form className="mt-8 space-y-6">
-            <TextInput label="Email" id="email" name="email" type="email" />
+            <TextInput
+              label="Email"
+              data-testid="email"
+              name="email"
+              type="email"
+            />
             <TextInput
               label="Password"
-              id="password"
+              data-testid="password"
               name="password"
               type="password"
             />
             <button
-              id="login-btn"
+              data-testid="login-btn"
               type="submit"
               disabled={loading}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-2xl font-medium rounded-full text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"

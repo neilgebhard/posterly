@@ -35,13 +35,17 @@ const Navbar = () => {
   return (
     <nav className="bg-white">
       <div className="max-w-7xl mx-auto px-2 flex items-center justify-between py-2 text-xl font-medium">
-        <Link to="/" className="flex items-center gap-x-0">
+        <Link
+          data-testid="home-link"
+          to="/"
+          className="flex items-center gap-x-0"
+        >
           <QuestionMarkCircleIcon className="h-8 w-8 text-orange" />
           <h1 className="text-xl mb-0">reddit</h1>
         </Link>
         <div className="flex align-middle space-x-4">
           {isAuthenticated ? (
-            <Menu id="profile-menu" as="div" className="ml-3 relative">
+            <Menu data-testid="profile-menu" as="div" className="ml-3 relative">
               <div>
                 <Menu.Button>
                   <Flex className="hover:text-gray-600">
@@ -64,7 +68,7 @@ const Navbar = () => {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        id="profile-btn"
+                        data-testid="profile-link"
                         to="/profile"
                         className={classNames(
                           active ? "bg-gray-100" : "",
@@ -79,6 +83,7 @@ const Navbar = () => {
                     {({ active }) => (
                       // eslint-disable-next-line
                       <a
+                        data-testid="logout-link"
                         role="button"
                         onClick={handleLogout}
                         className={classNames(
@@ -97,8 +102,8 @@ const Navbar = () => {
             <>
               <Flex>
                 <Link
+                  data-testid="login-link"
                   to="/login"
-                  id="login-link"
                   className="text-base border-blue-600 text-blue-600 border-2 px-10 py-1 rounded-full"
                 >
                   Log In
@@ -106,7 +111,7 @@ const Navbar = () => {
               </Flex>
               <Flex>
                 <Link
-                  id="signup-link"
+                  data-testid="signup-link"
                   to="/signup"
                   className="text-white text-base hover:text-white bg-blue-600 hover:bg-blue-500 active:bg-indigo-400 px-10 py-1 rounded-full"
                 >

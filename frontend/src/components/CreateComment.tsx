@@ -59,7 +59,7 @@ const CreateComment = ({ postId, setPost }: AppProps) => {
     >
       <Form className="space-y-3 mb-3">
         <TextArea
-          id="comment-text"
+          data-testid="comment-text"
           label={`Comment as ${username}`}
           name="text"
           type="text"
@@ -67,7 +67,7 @@ const CreateComment = ({ postId, setPost }: AppProps) => {
         />
         <div className="sm:flex sm:justify-end">
           <SubmitButtom
-            id="submit-btn"
+            data-testid="submit-comment"
             className="w-full sm:w-auto"
             loading={loading}
           >

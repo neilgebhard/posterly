@@ -1,8 +1,8 @@
 import randomstring from "randomstring";
 
-const POST_TEXT = randomstring.generate(12);
-const COMMENT_TEXT = randomstring.generate(12);
-const REPLY_TEXT = randomstring.generate(12);
+const postText = randomstring.generate(12);
+const commentText = randomstring.generate(12);
+const replyText = randomstring.generate(12);
 
 const username = randomstring.generate(12);
 const email = `${randomstring.generate(6)}@${randomstring.generate(6)}.com`;
@@ -11,7 +11,6 @@ const password = randomstring.generate(12);
 let usernameItem;
 let emailItem;
 
-// Homepage
 describe("homepage", () => {
   it("renders correctly", () => {
     cy.visit("/");
@@ -19,15 +18,14 @@ describe("homepage", () => {
   });
 });
 
-// Signup
 describe("signup", () => {
   it("can signup", () => {
     cy.visit("/");
-    cy.get("#signup-link").click();
-    cy.get("#username").clear().type(username);
-    cy.get("#email").clear().type(email);
-    cy.get("#password").clear().type(password);
-    cy.get("#signup-btn")
+    cy.get("[data-testid=signup-link]").click();
+    cy.get("[data-testid=username]").type(username);
+    cy.get("[data-testid=email]").type(email);
+    cy.get("[data-testid=password]").type(password);
+    cy.get("[data-testid=signup-btn]")
       .click()
       .should(() => {
         expect(localStorage.getItem("email")).to.eq(email);
@@ -38,17 +36,16 @@ describe("signup", () => {
   });
 
   it("can go to profile", () => {
-    cy.get("#profile-menu").click();
-    cy.contains("Your Profile").click();
+    cy.get("[data-testid=profile-menu]").click();
+    cy.get("[data-testid=profile-link]").click();
     cy.contains(username).should("exist");
     cy.contains(email).should("exist");
-    cy.contains("Home").click();
+    cy.get("[data-testid=home-link]").click();
   });
 
-  // Logout
   it("can logout", () => {
-    cy.get("#profile-menu").click();
-    cy.contains("Log out")
+    cy.get("[data-testid=profile-menu]").click();
+    cy.get("[data-testid=logout-link")
       .click()
       .should(() => {
         expect(localStorage.getItem("email")).to.be.null;
@@ -74,10 +71,10 @@ describe("logged in capabilities", () => {
   });
 
   it("can login", () => {
-    cy.get("#login-link").click();
-    cy.get("#email").type(email);
-    cy.get("#password").type(password);
-    cy.get("#login-btn")
+    cy.get("[data-testid=login-link]").click();
+    cy.get("[data-testid=email]").type(email);
+    cy.get("[data-testid=password]").type(password);
+    cy.get("[data-testid=login-btn]")
       .click()
       .should(() => {
         expect(localStorage.getItem("email")).to.exist;
@@ -87,49 +84,72 @@ describe("logged in capabilities", () => {
     cy.getCookie("token").should("exist");
   });
 
-  // Create a post
   it("can create a post", () => {
-    cy.get("#create-post-link").click();
-    cy.get("#title").clear().type(POST_TEXT);
-    cy.get("#create-post-btn").click();
-    cy.contains(POST_TEXT).should("exist");
+    cy.get("[data-testid=create-post-link]").click();
+    cy.get("[data-testid=title]").type(postText);
+    cy.get("[data-testid=create-post-btn]").click();
+    cy.contains(postText).should("exist");
   });
 
-  // Create a comment
   it("can create a comment", () => {
-    cy.contains(POST_TEXT).parent().find("#comment-link").click();
-    cy.get("#comment-text").clear().type(COMMENT_TEXT);
-    cy.get("#comment-text").parents("form").find("#submit-btn").click();
-    cy.contains(COMMENT_TEXT).should("exist");
+    cy.contains(postText)
+      .parents("li")
+      .find("[data-testid=comments-link]")
+      .click();
+    cy.get("[data-testid=comment-text]").type(commentText);
+    cy.get("[data-testid=comment-text]")
+      .parents("form")
+      .find("[data-testid=submit-comment]")
+      .click();
+    cy.contains(commentText).should("exist");
   });
 
-  // Create a reply
   it("can create a reply", () => {
-    cy.contains(POST_TEXT).parent().find("#comment-link").click();
-    cy.contains(COMMENT_TEXT).parent().find("#reply-btn").click();
-    cy.get("#reply-text").clear().type(REPLY_TEXT);
-    cy.get("#reply-text").parents("form").find("#submit-btn").click();
-    cy.contains(REPLY_TEXT).should("exist");
+    cy.contains(postText)
+      .parents("li")
+      .find("[data-testid=comments-link]")
+      .click();
+    cy.contains(commentText)
+      .parents("li")
+      .find("[data-testid=reply-btn]")
+      .click();
+    cy.get("[data-testid=reply-text]").type(replyText);
+    cy.get("[data-testid=reply-text]")
+      .parents("form")
+      .find("[data-testid=submit-reply]")
+      .click();
+    cy.contains(replyText).should("exist");
   });
 
-  // Delete a reply
   it("can delete a reply", () => {
-    cy.contains(POST_TEXT).parent().find("#comment-link").click();
-    cy.contains(REPLY_TEXT).parent().find("#delete-btn").click();
-    cy.contains(REPLY_TEXT).should("not.exist");
+    cy.contains(postText)
+      .parents("li")
+      .find("[data-testid=comments-link]")
+      .click();
+    cy.contains(replyText)
+      .parents("li")
+      .find("[data-testid=delete-reply]")
+      .click();
+    cy.contains(replyText).should("not.exist");
   });
 
-  // Delete a comment
   it("can delete a comment", () => {
-    cy.contains(POST_TEXT).parent().find("#comment-link").click();
-    cy.contains(COMMENT_TEXT).parent().find("#delete-btn").click();
-    cy.contains(COMMENT_TEXT).should("not.exist");
+    cy.contains(postText)
+      .parents("li")
+      .find("[data-testid=comments-link]")
+      .click();
+    cy.contains(commentText)
+      .parents("li")
+      .find("[data-testid=delete-comment]")
+      .click();
+    cy.contains(commentText).should("not.exist");
   });
 
-  // Delete a post
   it("can delete a post", () => {
-    cy.contains(POST_TEXT).parent().find("#delete-btn").click();
-    cy.contains(POST_TEXT).should("not.exist");
+    cy.contains(postText)
+      .parents("li")
+      .find("[data-testid=delete-post]")
+      .click();
+    cy.contains(postText).should("not.exist");
   });
-  // Delete user
 });
