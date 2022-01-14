@@ -5,14 +5,14 @@ import Flex from "../ui/Flex";
 import { TrashIcon } from "@heroicons/react/solid";
 import { Reply as ReplyType } from "../types";
 
-type AppProps = {
+type Props = {
   reply: ReplyType;
   fetchPost: () => void;
   postId: string;
   commentId: string;
 };
 
-const Reply = ({ reply, fetchPost, postId, commentId }: AppProps) => {
+const Reply = ({ reply, fetchPost, postId, commentId }: Props) => {
   const handleDelete = async () => {
     await axios.delete(
       `/api/posts/${postId}/comments/${commentId}/replies/${reply._id}`

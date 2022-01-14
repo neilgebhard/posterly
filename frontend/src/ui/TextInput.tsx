@@ -1,11 +1,11 @@
 import { useField, Field, FieldAttributes } from "formik";
 import Error from "../components/Error";
 
-type AppProps = {
+type Props = {
   label?: string;
 } & FieldAttributes<{}>;
 
-const TextInput = ({ label = "", className = "", ...props }: AppProps) => {
+const TextInput = ({ label = "", className = "", ...props }: Props) => {
   const [field, meta] = useField(props);
   return (
     <div>

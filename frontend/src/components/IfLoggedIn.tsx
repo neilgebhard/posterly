@@ -1,10 +1,10 @@
 import { useAuth } from "../context/Auth";
 
-type AppProps = {
+type Props = {
   children: React.ReactNode;
 };
 
-const IfLoggedIn = ({ children }: AppProps) => {
+const IfLoggedIn = ({ children }: Props) => {
   const auth = useAuth();
 
   return <>{auth.isAuthenticated() ? <div>{children}</div> : null}</>;

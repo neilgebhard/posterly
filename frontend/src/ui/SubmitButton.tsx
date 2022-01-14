@@ -1,4 +1,4 @@
-type AppProps = {
+type Props = {
   children: React.ReactNode;
   loading?: boolean;
   className?: string;
@@ -11,7 +11,7 @@ const SubmitButton = ({
   loading = false,
   className = "",
   ...rest
-}: AppProps) => {
+}: Props) => {
   return (
     <button
       type="submit"

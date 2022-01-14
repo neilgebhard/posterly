@@ -9,13 +9,13 @@ import CreatedAt from "./CreatedAt";
 import ReplyButton from "./ReplyButton";
 import type { Comment as CommentType } from "../types";
 
-type AppProps = {
+type Props = {
   comment: CommentType;
   postId: string;
   fetchPost: () => void;
 };
 
-const Comment = ({ comment, postId, fetchPost }: AppProps) => {
+const Comment = ({ comment, postId, fetchPost }: Props) => {
   const [showReply, setShowReply] = useState(false);
 
   const handleDelete = async () => {

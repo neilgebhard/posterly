@@ -1,12 +1,12 @@
 import Flex from "../ui/Flex";
 import { TrashIcon } from "@heroicons/react/outline";
 
-type AppProps = {
+type Props = {
   children: React.ReactNode;
   onClick?: () => void;
 };
 
-const DeleteButton = ({ children, ...rest }: AppProps) => {
+const DeleteButton = ({ children, ...rest }: Props) => {
   return (
     <Flex
       id="delete-btn"

@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import { useAuth } from "../context/Auth";
 import type { Post } from "../types";
 
-type AppProps = {
+type Props = {
   postId: string;
   setPost: (post: Post) => void;
 };
@@ -19,7 +19,7 @@ const CommentSchema = Yup.object().shape({
   text: Yup.string().required("Enter a comment."),
 });
 
-const CreateComment = ({ postId, setPost }: AppProps) => {
+const CreateComment = ({ postId, setPost }: Props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { auth } = useAuth();

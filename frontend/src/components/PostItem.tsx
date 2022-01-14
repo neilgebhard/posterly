@@ -7,13 +7,13 @@ import Votes from "./Votes";
 import { ChatAltIcon, TrashIcon } from "@heroicons/react/outline";
 import type { Post } from "../types";
 
-type AppProps = {
+type Props = {
   post: Post;
   isPostPage?: boolean;
   removePost?: (postId: string) => void;
 };
 
-const PostItem = ({ post, removePost, isPostPage }: AppProps) => {
+const PostItem = ({ post, removePost, isPostPage }: Props) => {
   const handleDelete = async () => {
     await axios.delete(`/api/posts/${post._id}`);
     if (removePost) removePost(post._id);

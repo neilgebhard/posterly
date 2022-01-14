@@ -1,8 +1,8 @@
-type AppProps = {
+type Props = {
   error: string;
 };
 
-const Error = ({ error }: AppProps) => {
+const Error = ({ error }: Props) => {
   return <div className="text-red-500">{error}</div>;
 };
 

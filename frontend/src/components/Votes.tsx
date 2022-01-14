@@ -7,11 +7,11 @@ import {
 import { useAuth } from "../context/Auth";
 import type { Post } from "../types";
 
-type AppProps = {
+type Props = {
   post: Post;
 };
 
-const Votes = ({ post }: AppProps) => {
+const Votes = ({ post }: Props) => {
   const { auth } = useAuth();
   const [votes, setVotes] = useState(
     () => post.upvotes.length - post.downvotes.length

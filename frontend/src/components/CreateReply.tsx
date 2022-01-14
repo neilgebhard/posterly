@@ -11,7 +11,7 @@ const ReplySchema = Yup.object().shape({
   text: Yup.string().required("Enter a reply."),
 });
 
-type AppProps = {
+type Props = {
   comment: Comment;
   postId: string;
   fetchPost: () => void;
@@ -20,12 +20,7 @@ type AppProps = {
 
 type FormValues = { text: string };
 
-const CreateReply = ({
-  comment,
-  postId,
-  fetchPost,
-  setShowReply,
-}: AppProps) => {
+const CreateReply = ({ comment, postId, fetchPost, setShowReply }: Props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 

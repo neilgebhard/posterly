@@ -10,10 +10,10 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
-type AppProps = {
+type Props = {
   children: React.ReactNode;
 };
-function AuthProvider({ children }: AppProps) {
+function AuthProvider({ children }: Props) {
   const _id = localStorage.getItem("_id");
   const username = localStorage.getItem("username");
   const email = localStorage.getItem("email");
