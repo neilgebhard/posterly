@@ -12,7 +12,8 @@ type Props = {
 };
 
 const Votes = ({ post }: Props) => {
-  const { auth } = useAuth();
+  const { auth, isAuthenticated } = useAuth();
+  const test = useAuth();
   const [votes, setVotes] = useState(
     () => post.upvotes.length - post.downvotes.length
   );
@@ -25,10 +26,11 @@ const Votes = ({ post }: Props) => {
   );
 
   const handleUpvote = async () => {
+    if (!isAuthenticated()) return;
+
     if (isUpvoted) {
       setVotes((votes) => votes - 1);
       setUpvoted(false);
-      // cancel upvote
       await axios.post(`/api/posts/${post._id}/upvote/cancel`);
     } else if (isDownvoted) {
       setVotes((votes) => votes + 2);
@@ -43,11 +45,11 @@ const Votes = ({ post }: Props) => {
   };
 
   const handleDownvote = async () => {
+    if (!isAuthenticated()) return;
+
     if (isDownvoted) {
       setVotes((votes) => votes + 1);
       setDownvoted(false);
-
-      // cancel downvote
       await axios.post(`/api/posts/${post._id}/downvote/cancel`);
     } else if (isUpvoted) {
       setVotes((votes) => votes - 2);
