@@ -1,7 +1,7 @@
 import axios from "axios";
 import CreatedAt from "./CreatedAt";
 import IfUser from "./IfUser";
-import Flex from "../ui/Flex";
+import Flex from "./Flex";
 import { TrashIcon } from "@heroicons/react/solid";
 import { Reply as ReplyType } from "../types";
 

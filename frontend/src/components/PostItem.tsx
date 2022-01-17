@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import CreatedAt from "./CreatedAt";
 import IfUser from "./IfUser";
-import Flex from "../ui/Flex";
+import Flex from "./Flex";
 import Votes from "./Votes";
 import { ChatAltIcon, TrashIcon } from "@heroicons/react/outline";
 import type { Post } from "../types";

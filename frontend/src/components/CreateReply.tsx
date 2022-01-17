@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import { Formik, Form } from "formik";
-import TextArea from "../ui/TextArea";
-import SubmitButton from "../ui/SubmitButton";
+import TextArea from "./TextArea";
+import SubmitButton from "./SubmitButton";
 import Error from "./Error";
 import * as Yup from "yup";
 import type { Comment } from "../types";

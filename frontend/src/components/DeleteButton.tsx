@@ -1,4 +1,4 @@
-import Flex from "../ui/Flex";
+import Flex from "./Flex";
 import { TrashIcon } from "@heroicons/react/outline";
 
 type Props = {

@@ -13,7 +13,6 @@ type Props = {
 
 const Votes = ({ post }: Props) => {
   const { auth, isAuthenticated } = useAuth();
-  const test = useAuth();
   const [votes, setVotes] = useState(
     () => post.upvotes.length - post.downvotes.length
   );

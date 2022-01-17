@@ -9,7 +9,7 @@ import {
 } from "@heroicons/react/solid";
 import { Menu, Transition } from "@headlessui/react";
 import { useHistory } from "react-router-dom";
-import Flex from "../ui/Flex";
+import Flex from "./Flex";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");

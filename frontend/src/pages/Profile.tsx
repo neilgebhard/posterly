@@ -1,6 +1,6 @@
 import { useAuth } from "../context/Auth";
 import { MailIcon, UserCircleIcon } from "@heroicons/react/solid";
-import Flex from "../ui/Flex";
+import Flex from "../components/Flex";
 
 const Profile = () => {
   const { username, email } = useAuth().auth;

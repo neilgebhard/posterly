@@ -2,9 +2,9 @@ import axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Formik, Form } from "formik";
-import TextInput from "../ui/TextInput";
-import TextArea from "../ui/TextArea";
-import SubmitButton from "../ui/SubmitButton";
+import TextInput from "../components/TextInput";
+import TextArea from "../components/TextArea";
+import SubmitButton from "../components/SubmitButton";
 import Error from "../components/Error";
 import * as Yup from "yup";
 

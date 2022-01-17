@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { useAuth } from "../context/Auth";
-import TextInput from "../ui/TextInput";
+import TextInput from "../components/TextInput";
 import Error from "../components/Error";
 import * as Yup from "yup";
 import { LockClosedIcon } from "@heroicons/react/solid";
