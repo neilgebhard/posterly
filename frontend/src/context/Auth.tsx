@@ -13,6 +13,7 @@ const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 type Props = {
   children: React.ReactNode;
 };
+
 function AuthProvider({ children }: Props) {
   const _id = localStorage.getItem("_id");
   const username = localStorage.getItem("username");

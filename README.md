@@ -17,14 +17,13 @@ This repository holds the source code for a Reddit clone. The features of the ap
 ## Why I built the project this way
 
 - I decided to make a clone so that my primary focus could be on the development process. By copying an existing application, I'm able to avoid creating designs from scratch and doing product development.
-- For state management, I realized that many modern React apps aren't using Redux anymore. Nowadays, there are many viable alternatives to Redux such as react-query, MobX, Zustand, and Recoil. Therefore, I used `useState` and `Context` because I wanted to establish and prove my foundation in React's core features and stay technology-agnostic.
-- I used `TypeScript` because the industry seems to be gravitating toward it and it touts so many benefits. Small bugs become so much easier to catch, especially ones that are masterfully hidden through JavaScript's dynamic typing. Refactoring and reiterating code becomes a breeze with TypeScript's code completion and IDE IntelliSense.
-- Even though I'm mainly a **front-end developer**, my aim is to gain a well-rounded perspective on developing web applications. Hence, I made this app full-stack to provide myself with an optimal learning experience. For a front-end developer, there are many insights gained by developing a back-end such as learning about `HTTP`, `API design`, and `authentication`.
-- Testing is important for ensuring that an application is working as intended for users. It helps detect and protect code from bugs as changes are made to an application. `Cypress` has been gaining popularity as a leading end-to-end testing framework, so I used the technology in this project. You can see some of the code I wrote using it [here](https://github.com/neilgebhard/reddit-clone/blob/master/frontend/cypress/integration/app.spec.js).
+- For state management, I realized that many modern React apps aren't using Redux anymore. Nowadays, there are many viable alternatives to Redux such as react-query, MobX, Zustand, and Recoil. Therefore, I used `useState` and `Context` because I wanted to use React's native state management API to stay technology-agnostic.
+- I used `TypeScript` because it's the industry standard and it touts so many benefits. Small bugs become so much easier to catch, especially ones that are hidden through JavaScript's dynamic typing. Refactoring and reiterating code becomes a breeze with TypeScript's code completion and IDE IntelliSense.
+- Testing is important for ensuring that an application is working as intended for users. It helps detect and protect code from bugs as changes are made to an application. `Cypress` is a leading end-to-end testing framework, so I used it in this project. You can see some of the code I wrote [here](https://github.com/neilgebhard/reddit-clone/blob/master/frontend/cypress/integration/app.spec.js).
 
 ## Technologies
 
-The frameworks and libraries this project is made with:
+The frameworks and libraries of this project:
 
 Frontend:
 
