@@ -1,6 +1,6 @@
 # Reddit clone
 
-This repository holds the source code for a Reddit clone.
+This repository holds the source code for a Reddit clone. The live demo is deployed on Heroku: https://neilsreddit.herokuapp.com/.
 
 ## Features
 
@@ -98,9 +98,7 @@ npm run data:import
 npm run data:destroy
 ```
 
-## Demo
-
-The live demo is deployed on Heroku: https://neilsreddit.herokuapp.com/. Feel free to make an account, add posts, comments, and replies!
+## Heroku
 
 To log in to Heroku in terminal:
 
