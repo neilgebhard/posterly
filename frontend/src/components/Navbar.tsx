@@ -40,8 +40,9 @@ const Navbar = () => {
           to='/'
           className='flex items-center gap-x-0'
         >
-          <QuestionMarkCircleIcon className='h-8 w-8 text-orange' />
-          <h1 className='text-xl mb-0'>Posterly</h1>
+          <h1 className='text-xl mb-0'>
+            <span className='text-orange'>Post</span>erly
+          </h1>
         </Link>
         <div className='flex align-middle space-x-4'>
           {isAuthenticated ? (
