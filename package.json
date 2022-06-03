@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "name": "mern-reddit-clone",
-  "description": "A Reddit clone using the MERN stack",
+  "name": "Posterly",
+  "description": "A full-stack web application with posts, comments, upvotes/downvotes, and authentication",
   "author": "Neil Gebhard",
   "main": "server.js",
   "license": "",

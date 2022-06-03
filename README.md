@@ -1,6 +1,6 @@
-# Reddit clone
+# Posterly
 
-This repository holds the source code for a Reddit clone. The live demo is deployed on Heroku: https://neilsreddit.herokuapp.com/.
+This repository holds the source code for Posterly. The live demo is deployed on Heroku: https://posterly.herokuapp.com/.
 
 ## Features
 
@@ -57,7 +57,7 @@ REACT_APP_apiURL=http://localhost:3001
 Install dependencies using npm:
 
 ```
-$ cd ./mern-reddit
+$ cd ./posterly
 $ npm install
 $ npm run dev
 ```
